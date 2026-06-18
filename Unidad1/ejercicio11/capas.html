@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Uso de capas</title>
+
+    <style>
+
+        body{
+            margin:0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Cabecera */
+        #cabecera{
+            background-color: lightblue;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Zona central */
+        #contenedor{
+            display: flex;
+            height: 300px;
+        }
+
+        /* Capa izquierda */
+        #izquierda{
+            width: 50%;
+            background-color: lightgreen;
+            padding: 20px;
+        }
+
+        /* Capa derecha */
+        #derecha{
+            width: 50%;
+            background-color: lightyellow;
+            padding: 20px;
+        }
+
+        /* Pie */
+        #pie{
+            background-color: lightcoral;
+            text-align: center;
+            padding: 20px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <!-- Cabecera -->
+    <div id="cabecera">
+        <h1>Página estructurada con capas</h1>
+    </div>
+
+    <!-- Zona central -->
+    <div id="contenedor">
+
+        <!-- Izquierda -->
+        <div id="izquierda">
+
+            <ul>
+                <li><span style="color:red; font-size:18px;">Rojo</span></li>
+
+                <li><span style="color:blue; font-size:18px;">Azul</span></li>
+
+                <li><span style="color:green; font-size:18px;">Verde</span></li>
+
+                <li><span style="color:orange; font-size:18px;">Naranja</span></li>
+
+                <li><span style="color:purple; font-size:18px;">Morado</span></li>
+            </ul>
+
+        </div>
+
+        <!-- Derecha -->
+        <div id="derecha">
+            <p>Contenido de la capa derecha.</p>
+        </div>
+
+    </div>
+
+    <!-- Pie -->
+    <div id="pie">
+        <p>Pie de página</p>
+    </div>
+
+</body>
+</html>

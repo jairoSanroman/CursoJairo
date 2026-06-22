@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insertar vídeo en la Web</title>
+</head>
+<body>
+
+  <h1>Insertar vídeo en la Web</h1>
+
+  <!-- ── VÍDEO DE YOUTUBE ── -->
+
+  <h2>Vídeo de YouTube</h2>
+
+  <iframe width="560" height="315"
+    src="https://youtu.be/YDDTEQgcAPg?si=JYthsUt9bjmcrpjj"
+    title="Vídeo de YouTube"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+  <!-- <iframe>: Incrusta contenido externo dentro de la página.
+       Se usa para insertar vídeos de YouTube porque el archivo no está
+       en nuestro servidor sino alojado en los servidores de YouTube.
+       src: URL especial de inserción (/embed/ en vez de /watch?v=).
+       allowfullscreen: permite ver el vídeo en pantalla completa.
+       frameborder="0": elimina el borde del marco. -->
+
+  <!-- ── AUDIO MP3 DESDE DISCO ── -->
+
+  <h2>Audio MP3</h2>
+
+  <audio controls>
+    <source src="audio/cancion.mp3" type="audio/mpeg">
+    <!-- <source>: especifica el archivo de audio y su tipo MIME.
+         src: ruta relativa al archivo mp3 en el disco.
+         type="audio/mpeg": indica al navegador el formato del archivo. -->
+    Tu navegador no soporta el elemento audio.
+    <!-- Este texto solo se muestra si el navegador no soporta <audio>. -->
+  </audio>
+  <!-- <audio>: Inserta un reproductor de audio en la página.
+       controls: muestra los controles de reproducción (play, pausa, volumen).
+       El archivo cancion.mp3 debe estar en una carpeta "audio" junto a este html. -->
+
+</body>
+</html>

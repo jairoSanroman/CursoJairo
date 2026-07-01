@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edición de imágenes para Web</title>
+</head>
+<body>
+
+  <h1>Edición de imágenes para Web</h1>
+  <!-- Página que muestra las tres versiones de la misma imagen:
+       original, reducida a 100px y reducida + girada 45 grados -->
+
+  <!-- ── IMAGEN ORIGINAL ── -->
+  <h2>Imagen original</h2>
+  <!-- Se muestra la fotografía original de alta resolución descargada de Unsplash.
+       Se limita el ancho a 600px para que no desborde la página. -->
+  <p>
+    <img src="rafael-peier-RNZCFud7ziE-unsplash.jpg"
+         alt="Paisaje fotográfico original de alta resolución"
+         width="600">
+  </p>
+  <!-- <img>: inserta una imagen en la página.
+       src: ruta del archivo de imagen.
+       alt: texto alternativo para accesibilidad y cuando la imagen no carga.
+       width: ancho de visualización en píxeles (no modifica el archivo original). -->
+
+  <!-- ── IMAGEN REDUCIDA A 100PX ── -->
+  <h2>Imagen reducida a 100px de ancho</h2>
+  <!-- Imagen exportada desde GIMP tras escalarla a 100px de ancho
+       manteniendo la proporción original. Guardada en formato PNG. -->
+  <p>
+    <img src="escalado.png"
+         alt="Paisaje reducido a 100px de ancho manteniendo proporción">
+  </p>
+
+  <!-- ── IMAGEN REDUCIDA Y GIRADA 45 GRADOS ── -->
+  <h2>Imagen reducida y girada 45 grados</h2>
+  <!-- Imagen exportada desde GIMP tras escalarla a 100px y aplicarle
+       una rotación arbitraria de 45 grados. Guardada en formato PNG. -->
+  <p>
+    <img src="45grados.png"
+         alt="Paisaje reducido a 100px y girado 45 grados">
+  </p>
+
+</body>
+</html>

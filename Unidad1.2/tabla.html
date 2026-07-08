@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabla con CSS</title>
+  <!-- Se enlaza el archivo CSS externo -->
+  <link rel="stylesheet" href="tabla.css">
+</head>
+<body>
+
+  <table>
+    <caption>Título de la tabla</caption>
+    <!-- <caption>: título visible de la tabla, se muestra encima por defecto -->
+
+    <tr>
+      <!-- class="resaltada": aplica el estilo de primera celda (azul sobre amarillo) -->
+      <td class="resaltada">Celda 1</td>
+      <td>Celda 2</td>
+      <td>Celda 3</td>
+      <td>Celda 4</td>
+      <!-- La última celda de cada fila se resalta con la pseudoclase :last-child en el CSS -->
+    </tr>
+    <tr>
+      <td class="resaltada">Celda 5</td>
+      <td>Celda 6</td>
+      <td>Celda 7</td>
+      <td>Celda 8</td>
+    </tr>
+    <tr>
+      <td class="resaltada">Celda 9</td>
+      <td>Celda 10</td>
+      <td>Celda 11</td>
+      <td>Celda 12</td>
+    </tr>
+  </table>
+
+</body>
+</html>

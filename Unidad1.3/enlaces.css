@@ -1,0 +1,23 @@
+/* ── enlaces.css ── */
+
+/* a: estado por defecto del enlace
+   Color amarillo sobre fondo azul */
+a {
+  color: yellow;
+  background-color: blue;
+}
+
+/* a:hover: cuando el ratón pasa por encima del enlace
+   Color negro en negrita sobre fondo amarillo */
+a:hover {
+  color: black;
+  font-weight: bold;
+  background-color: yellow;
+}
+
+/* a:visited: cuando el enlace ya ha sido visitado
+   Color rojo sobre fondo blanco */
+a:visited {
+  color: red;
+  background-color: white;
+}

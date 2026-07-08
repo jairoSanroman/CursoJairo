@@ -1,0 +1,27 @@
+/* ── Archivo CSS externo: estilos.css ── */
+/* Este archivo contiene todos los estilos separados del documento HTML */
+
+/* Selector: h1
+   Aplica estilos al encabezado principal */
+h1 {
+  font-size: 50px;    /* Tamaño de letra */
+  color: blue;        /* Color del texto */
+  font-family: Verdana; /* Tipo de fuente */
+}
+
+/* Selector: h2
+   Aplica estilos al subtítulo */
+h2 {
+  font-size: 30px;
+  color: red;
+  font-family: Arial;
+}
+
+/* Selector: p
+   Aplica estilos al párrafo */
+p {
+  font-size: 20px;
+  color: yellow;
+  font-family: Arial;
+  background: black;  /* Color de fondo del párrafo */
+}

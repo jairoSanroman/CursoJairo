@@ -1,0 +1,27 @@
+/* ── tabla.css ── */
+
+/* Borde sólido negro de 3px para la tabla completa */
+table {
+  border: 3px solid black;
+  border-collapse: collapse; /* Une los bordes de tabla y celdas sin separación */
+}
+
+/* Borde sólido negro de 2px para cada celda */
+td {
+  border: 2px solid black;
+  padding: 5px 10px; /* Espacio interior para que el texto no quede pegado al borde */
+}
+
+/* Clase .resaltada: primera celda de cada fila
+   Texto azul sobre fondo amarillo */
+.resaltada {
+  color: blue;
+  background-color: yellow;
+}
+
+/* Pseudoclase :last-child: última celda de cada fila
+   Texto rojo sobre fondo gris */
+td:last-child {
+  color: red;
+  background-color: gray;
+}

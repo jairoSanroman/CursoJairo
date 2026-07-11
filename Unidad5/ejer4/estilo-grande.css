@@ -1,0 +1,50 @@
+/* ── estilo-grande.css ── */
+/* Estilos para pantallas con ancho mayor o igual a 768px */
+
+body {
+  background-color: cyan;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 10px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 28px;
+}
+
+main {
+  display: flex;         /* Las columnas se colocan en fila */
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.columna1 {
+  background-color: pink;
+  height: 100px;
+  width: 40%;            /* 40% cada una → 80% en total */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.columna2 {
+  background-color: gray;
+  height: 200px;
+  width: 40%;            /* 40% cada una → 80% en total */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+footer {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+}

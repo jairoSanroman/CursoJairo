@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página con diseño adaptativo</title>
+
+  <!-- Hoja de estilos para pantallas mayores de 768px -->
+  <link rel="stylesheet" href="estilo-grande.css" media="screen and (min-width: 768px)">
+
+  <!-- Hoja de estilos para pantallas menores de 768px -->
+  <link rel="stylesheet" href="estilo-pequeno.css" media="screen and (max-width: 767px)">
+
+</head>
+<body>
+
+  <header>
+    <h1>Página con diseño adaptativo</h1>
+    <p>La página se adaptará cuando la resolución de la pantalla sea pequeña</p>
+  </header>
+  <!-- <header>: cabecera de la página con el título y subtítulo -->
+
+  <main>
+    <div class="columna1">
+      <p>Este texto está en la columna 1.</p>
+    </div>
+    <!-- .columna1: caja izquierda, fondo rosa, altura 100px -->
+
+    <div class="columna2">
+      <p>Este texto está en la columna 2.</p>
+    </div>
+    <!-- .columna2: caja derecha, fondo gris, altura 200px -->
+  </main>
+
+  <footer>
+    <p>Teléfono: 555-12341234</p>
+    <p>Email: contacto@webmaster.web</p>
+  </footer>
+  <!-- <footer>: pie de página con información de contacto -->
+
+</body>
+</html>

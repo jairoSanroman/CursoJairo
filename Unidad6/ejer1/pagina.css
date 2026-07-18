@@ -1,0 +1,84 @@
+/* ── pagina.css ── */
+
+/* Reset básico para que la página se vea igual en todos los navegadores */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* b. Fondo de la página color plata */
+body {
+  background-color: silver;
+  font-family: Arial, sans-serif;
+}
+
+/* c. Encabezado: ancho completo, fondo marrón, texto blanco centrado */
+header {
+  width: 100%;
+  background-color: brown;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* d. Barra de navegación: fondo cyan claro, opciones horizontales y centradas */
+nav {
+  background-color: lightcyan;
+  text-align: center;
+  padding: 10px 0;
+}
+
+/* d. Botones del menú: fondo khaki, borde punteado, sin subrayado ni estilo de enlace */
+nav a {
+  display: inline-block;
+  background-color: khaki;
+  color: black;
+  text-decoration: none;   /* Elimina el subrayado típico de los enlaces */
+  border: 2px dotted black; /* Borde punteado */
+  padding: 8px 20px;
+  margin: 0 5px;
+}
+
+/* e. Al pasar el ratón sobre una opción el texto cambia a rojo */
+nav a:hover {
+  color: red;
+}
+
+/* f. Artículo: título con fondo amarillo claro, párrafo con fondo rosa */
+article {
+  margin: 20px auto;
+  width: 90%;
+}
+
+article h2 {
+  background-color: lightyellow;
+  padding: 10px;
+}
+
+article p {
+  background-color: pink;
+  padding: 15px;
+  text-align: justify;
+}
+
+/* f. Primera letra del párrafo: tamaño extra grande, color rojo, negrita */
+article p::first-letter {
+  font-size: 3em;
+  color: red;
+  font-weight: bold;
+  float: left;
+  margin-right: 5px;
+  line-height: 1;
+}
+
+/* g. Pie de página: fondo marrón, texto blanco centrado, 60% de ancho, bordes redondeados */
+footer {
+  background-color: brown;
+  color: white;
+  text-align: center;
+  width: 60%;
+  margin: 20px auto;
+  padding: 15px;
+  border-radius: 12px; /* Bordes redondeados */
+}

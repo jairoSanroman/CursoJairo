@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de nuevo usuario</title>
+</head>
+<body>
+
+  <h1>Registro de nuevo usuario</h1>
+
+  <form method="get" action="#">
+  <!-- method="get": usado para pruebas en local con Live Server.
+       En producción se usaría method="post" para mayor seguridad. -->
+
+    <!-- a. Campo de email obligatorio con foco al cargar la página -->
+    <p>
+      <label for="email">Usuario (Email):</label>
+      <input type="email" id="email" name="email" required autofocus>
+      <!-- type="email": valida el formato de email automáticamente.
+           required: campo obligatorio.
+           autofocus: recibe el foco automáticamente al cargar la página. -->
+    </p>
+
+    <!-- b. Campo de contraseña obligatorio con máximo 8 caracteres -->
+    <p>
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" name="password" required maxlength="8">
+      <!-- type="password": oculta los caracteres introducidos.
+           required: campo obligatorio.
+           maxlength="8": limita la entrada a un máximo de 8 caracteres. -->
+    </p>
+
+    <!-- c. Campo para subir un archivo de imagen -->
+    <p>
+      <label for="foto">Foto:</label>
+      <input type="file" id="foto" name="foto" accept="image/*">
+      <!-- type="file": abre el explorador de archivos para seleccionar un archivo.
+           accept="image/*": filtra para mostrar solo archivos de imagen. -->
+    </p>
+
+    <!-- d. Campo oculto con el valor "amigo" -->
+    <input type="hidden" name="tipo" value="amigo">
+    <!-- type="hidden": campo invisible para el usuario.
+         Se usa para enviar datos adicionales al servidor sin que el usuario los vea.
+         En este caso envía el valor "amigo" junto con el resto del formulario. -->
+
+    <!-- e. Botón de enviar y botón de borrar -->
+    <p>
+      <button type="submit">Enviar</button>
+      <!-- type="submit": envía los datos del formulario. -->
+
+      <button type="reset">Borrar</button>
+      <!-- type="reset": borra todos los campos del formulario. -->
+    </p>
+
+    <!-- f. Botón deshabilitado -->
+    <p>
+      <button type="button" disabled>Botón fuera de servicio</button>
+      <!-- disabled: deshabilita el botón. No se puede pulsar ni interactuar con él.
+           El navegador lo muestra visualmente en gris para indicar que no está disponible. -->
+    </p>
+
+  </form>
+
+</body>
+</html>

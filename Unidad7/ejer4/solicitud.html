@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de solicitud</title>
+</head>
+<body>
+
+  <form method="get" action="#">
+
+    <!-- ── DATOS PERSONALES ── -->
+    <fieldset>
+      <legend>Datos personales</legend>
+      <!-- En papel aparecían como líneas de puntos; en web usamos inputs de texto -->
+
+      <p>
+        <label for="nombre">D/Dª:</label>
+        <input type="text" id="nombre" name="nombre" size="40">
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni" size="12">
+      </p>
+
+      <p>
+        <label for="domicilio">Domicilio:</label>
+        <input type="text" id="domicilio" name="domicilio" size="30">
+        <label for="localidad">Localidad:</label>
+        <input type="text" id="localidad" name="localidad" size="20">
+        <label for="cp">C.P.:</label>
+        <input type="text" id="cp" name="cp" size="6">
+      </p>
+
+      <p>
+        <label for="provincia">Provincia:</label>
+        <!-- Lista desplegable: no posible en papel, sí en web -->
+        <select id="provincia" name="provincia">
+          <option value="">-- Seleccione --</option>
+          <option value="a_coruna">A Coruña</option>
+          <option value="albacete">Albacete</option>
+          <option value="alicante">Alicante</option>
+          <option value="almeria">Almería</option>
+          <option value="asturias">Asturias</option>
+          <option value="avila">Ávila</option>
+          <option value="badajoz">Badajoz</option>
+          <option value="barcelona">Barcelona</option>
+          <option value="burgos">Burgos</option>
+          <option value="caceres">Cáceres</option>
+          <option value="cadiz">Cádiz</option>
+          <option value="cantabria">Cantabria</option>
+          <option value="castellon">Castellón</option>
+          <option value="ceuta">Ceuta</option>
+          <option value="ciudad_real">Ciudad Real</option>
+          <option value="cordoba">Córdoba</option>
+          <option value="cuenca">Cuenca</option>
+          <option value="girona">Girona</option>
+          <option value="granada">Granada</option>
+          <option value="guadalajara">Guadalajara</option>
+          <option value="guipuzcoa">Guipúzcoa</option>
+          <option value="huelva">Huelva</option>
+          <option value="huesca">Huesca</option>
+          <option value="illes_balears">Illes Balears</option>
+          <option value="jaen">Jaén</option>
+          <option value="la_rioja">La Rioja</option>
+          <option value="las_palmas">Las Palmas</option>
+          <option value="leon">León</option>
+          <option value="lleida">Lleida</option>
+          <option value="lugo">Lugo</option>
+          <option value="madrid">Madrid</option>
+          <option value="malaga">Málaga</option>
+          <option value="melilla">Melilla</option>
+          <option value="murcia">Murcia</option>
+          <option value="navarra">Navarra</option>
+          <option value="ourense">Ourense</option>
+          <option value="palencia">Palencia</option>
+          <option value="pontevedra">Pontevedra</option>
+          <option value="salamanca">Salamanca</option>
+          <option value="santa_cruz">Santa Cruz de Tenerife</option>
+          <option value="segovia">Segovia</option>
+          <option value="sevilla">Sevilla</option>
+          <option value="soria">Soria</option>
+          <option value="tarragona">Tarragona</option>
+          <option value="teruel">Teruel</option>
+          <option value="toledo">Toledo</option>
+          <option value="valencia">Valencia</option>
+          <option value="valladolid">Valladolid</option>
+          <option value="vizcaya">Vizcaya</option>
+          <option value="zamora">Zamora</option>
+          <option value="zaragoza">Zaragoza</option>
+        </select>
+        <!-- <select>: lista desplegable, ventaja del formulario web frente al papel -->
+
+        <label for="telefono">Teléfono*:</label>
+        <input type="tel" id="telefono" name="telefono" size="15">
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" size="25">
+      </p>
+
+      <p><em>*Campo no obligatorio</em></p>
+
+    </fieldset>
+
+    <br>
+
+    <!-- ── SOLICITA ── -->
+    <h2>SOLICITA <em>(Marque el derecho que desea ejercitar)</em></h2>
+
+    <fieldset>
+      <legend>Opciones de solicitud</legend>
+      <!-- Checkboxes: selección múltiple, equivalente a las casillas del papel -->
+
+      <p>
+        <input type="checkbox" id="acceso" name="derechos" value="acceso">
+        <label for="acceso">Ejercitar el <strong>derecho de acceso</strong> a sus datos de carácter personal</label>
+      </p>
+
+      <!-- Subopciones del derecho de acceso, con sangría visual -->
+      <p style="margin-left: 30px;">
+        <input type="checkbox" id="postal" name="acceso_tipo" value="postal">
+        <label for="postal">Solicitando que se le remita dicha información a su dirección postal</label>
+      </p>
+
+      <p style="margin-left: 30px;">
+        <input type="checkbox" id="correo" name="acceso_tipo" value="correo">
+        <label for="correo">Solicitando que se le remita dicha información a su dirección de correo electrónico</label>
+      </p>
+
+      <p>
+        <input type="checkbox" id="rectificacion" name="derechos" value="rectificacion">
+        <label for="rectificacion">Ejercitar el <strong>Derecho de Rectificación</strong> de los siguientes datos de carácter personal en el sentido que se indica a continuación:</label>
+      </p>
+
+      <p>
+        <textarea name="rectificacion_texto" rows="3" cols="60" placeholder="Indique los datos a rectificar..."></textarea>
+        <!-- <textarea>: área de texto multilínea, equivalente a las líneas de puntos del papel -->
+      </p>
+
+    </fieldset>
+
+    <br>
+
+    <button type="submit">Enviar</button>
+    <button type="reset">Borrar</button>
+
+  </form>
+
+</body>
+</html>

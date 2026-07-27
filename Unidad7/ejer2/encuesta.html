@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de encuesta</title>
+</head>
+<body>
+
+  <h1>Formulario de encuesta</h1>
+
+  <form method="post" action="enviado.html" target="_blank" lang="es">
+  <!-- method="post": método más seguro para enviar datos privados,
+       los datos van en el cuerpo de la petición y no son visibles en la URL.
+       action="enviado.html": página a la que se envía el formulario.
+       target="_blank": abre la página de destino en una nueva pestaña.
+       lang="es": indica que el formulario está en español. -->
+
+    <!-- ── DATOS PERSONALES ── -->
+    <fieldset>
+      <legend>Datos Personales</legend>
+      <!-- <fieldset>: agrupa campos relacionados.
+           <legend>: título descriptivo del grupo de campos. -->
+
+      <p>
+        <label for="nombre">Nombre:</label>
+        <!-- <label>: etiqueta asociada al campo. Al pulsar sobre ella
+             el campo recibe el foco gracias al atributo for="nombre"
+             que coincide con el id del input. -->
+        <input type="text" id="nombre" name="nombre" autocomplete="off">
+        <!-- autocomplete="off": desactiva el autocompletado del campo. -->
+      </p>
+
+      <p>
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" id="apellidos" name="apellidos" autocomplete="off">
+        <!-- autocomplete="off": desactiva el autocompletado del campo. -->
+      </p>
+
+      <p>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <!-- type="email": valida que el formato sea un email correcto.
+             required: campo obligatorio, el formulario no se puede
+             enviar si este campo está vacío. -->
+      </p>
+
+    </fieldset>
+
+    <!-- ── ENCUESTA ── -->
+    <fieldset>
+      <legend>Encuesta</legend>
+
+      <p>¿Qué puntuación darías a esta página?</p>
+      <!-- Radio buttons: solo se puede marcar una opción a la vez
+           porque todos tienen el mismo atributo name="puntuacion". -->
+      <label><input type="radio" name="puntuacion" value="1"> 1 - Muy mala</label><br>
+      <label><input type="radio" name="puntuacion" value="2"> 2 - Mala</label><br>
+      <label><input type="radio" name="puntuacion" value="3"> 3 - Regular</label><br>
+      <label><input type="radio" name="puntuacion" value="4"> 4 - Buena</label><br>
+      <label><input type="radio" name="puntuacion" value="5"> 5 - Muy buena</label><br>
+
+      <br>
+
+      <p>¿Qué apartados te gustaría añadir a esta página?</p>
+      <!-- Checkboxes: se pueden marcar varias opciones simultáneamente. -->
+      <label><input type="checkbox" name="apartados" value="blog"> Blog</label><br>
+      <label><input type="checkbox" name="apartados" value="fotos"> Fotos</label><br>
+      <label><input type="checkbox" name="apartados" value="redes"> Redes Sociales</label><br>
+      <label><input type="checkbox" name="apartados" value="musica"> Música</label><br>
+      <label><input type="checkbox" name="apartados" value="noticias"> Noticias</label><br>
+
+    </fieldset>
+
+    <br>
+
+    <!-- Botón Enviar: envía el formulario a enviado.html en nueva pestaña -->
+    <button type="submit">Enviar</button>
+
+    <!-- Botón Borrar: limpia todos los campos del formulario -->
+    <button type="reset">Borrar</button>
+    <!-- type="reset": borra todos los datos introducidos en el formulario. -->
+
+  </form>
+
+</body>
+</html>

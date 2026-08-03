@@ -253,6 +253,7 @@
 
     <div class="filter-tabs">
         <button class="tab-btn active" onclick="filterCategory('all', this)">Todas las Preguntas</button>
+        <button class="tab-btn" onclick="filterCategory('uf1303-t2', this)">UF1303 Test 2</button>
         <button class="tab-btn" onclick="filterCategory('uf1304-t1', this)">UF1304 Test 1</button>
         <button class="tab-btn" onclick="filterCategory('uf1304-t2', this)">UF1304 Test 2</button>
         <button class="tab-btn" onclick="filterCategory('uf1304-final', this)">UF1304 Final</button>
@@ -267,6 +268,138 @@
 
 <script>
 const questionsData = [
+    // UF1303 TEST 2 (AÑADIDO)
+    {
+        cat: "uf1303-t2",
+        section: "UF1303 - Test 2",
+        q: "¿Con qué extensión guardamos nuestra hoja de estilos?",
+        options: [
+            ".html.",
+            ".css.",
+            ".htm.",
+            ".cs."
+        ],
+        correct: 1,
+        exp: "La extensión correspondiente a las hojas de estilo en cascada es .css (apartado 2.1)."
+    },
+    {
+        cat: "uf1303-t2",
+        section: "UF1303 - Test 2",
+        q: "¿Cómo comienza nuestro documento funcional?",
+        options: [
+            "Con el contenido.",
+            "Con un menú.",
+            "Con un título/logo o encabezado.",
+            "Con enlaces varios."
+        ],
+        correct: 2,
+        exp: "El documento funcional comienza con un título/logo o encabezado (apartado 2.1.1)."
+    },
+    {
+        cat: "uf1303-t2",
+        section: "UF1303 - Test 2",
+        q: "¿Qué determina las divisiones del documento HTML?",
+        options: [
+            "La URL.",
+            "Las imágenes.",
+            "Los enlaces.",
+            "El elemento div."
+        ],
+        correct: 3,
+        exp: "El elemento <div> se utiliza para estructurar y definir las divisiones dentro de un documento HTML (apartado 2.1.2)."
+    },
+    {
+        cat: "uf1303-t2",
+        section: "UF1303 - Test 2",
+        q: "¿Cómo hemos aplicado los estilos al documento funcional?",
+        options: [
+            "A través de una hoja de estilos en línea.",
+            "En una hoja incrustada.",
+            "A través de una hoja de estilos externa.",
+            "A través de una hoja de estilos importada."
+        ],
+        correct: 2,
+        exp: "Se han aplicado mediante una hoja de estilos externa (apartado 2.2)."
+    },
+    {
+        cat: "uf1303-t2",
+        section: "UF1303 - Test 2",
+        q: "¿Qué elemento hemos insertado en el documento funcional para que el archivo enlazado a curriculum.pdf se abra en una nueva página?",
+        options: [
+            "No se abre en una nueva página.",
+            "target:.",
+            "target!",
+            "target=."
+        ],
+        correct: 3,
+        exp: "Se utiliza el atributo de destino target= (por ejemplo, target=\"_blank\") (apartado 2.3)."
+    },
+    {
+        cat: "uf1303-t2",
+        section: "UF1303 - Test 2",
+        q: "¿Qué elemento usamos para que se vea un título al pasar sobre una imagen?",
+        options: [
+            "título.",
+            "title.",
+            "target.",
+            "Width."
+        ],
+        correct: 1,
+        exp: "El atributo title muestra una descripción abreviada (tooltip) al pasar el cursor (apartado 2.4)."
+    },
+    {
+        cat: "uf1303-t2",
+        section: "UF1303 - Test 2",
+        q: "¿Qué estilo se aplica al cuerpo del documento funcional para que la posición de la imagen de fondo esté centrada?",
+        options: [
+            "Background-position: center;.",
+            "Background-position: center.",
+            "Background-position: left;.",
+            "Background-position: fixed;."
+        ],
+        correct: 0,
+        exp: "La propiedad CSS correcta con sintaxis completa y punto y coma es Background-position: center; (apartado 2.5)."
+    },
+    {
+        cat: "uf1303-t2",
+        section: "UF1303 - Test 2",
+        q: "¿Cómo indicamos un estilo para redondear las esquinas de un borde en CSS 3?",
+        options: [
+            "Border-circle.",
+            "Border-round.",
+            "Border-radius.",
+            "Border-top."
+        ],
+        correct: 2,
+        exp: "En CSS3 se utiliza la propiedad border-radius (apartado 2.5)."
+    },
+    {
+        cat: "uf1303-t2",
+        section: "UF1303 - Test 2",
+        q: "¿Qué atributo usamos para aplicar un estilo versalitas al texto?",
+        options: [
+            "Font: variant;.",
+            "Font-variant: versalitas;.",
+            "Font-variant: small-caps.",
+            "Font-variant: small-caps;."
+        ],
+        correct: 3,
+        exp: "Para la variante versalitas se usa font-variant: small-caps; finalizada en punto y coma (apartado 2.5)."
+    },
+    {
+        cat: "uf1303-t2",
+        section: "UF1303 - Test 2",
+        q: "¿Qué elemento hemos aplicado en la hoja de estilos para cambiar el color del enlace una vez visitado?",
+        options: [
+            ".menu a:hover.",
+            ".menu a:visited.",
+            ".menu a.",
+            "menu a:visited."
+        ],
+        correct: 1,
+        exp: "Se aplica la pseudoclase :visited al enlace dentro de la clase .menu (.menu a:visited) (apartado 2.5)."
+    },
+
     // UF1304 TEST 1
     {
         cat: "uf1304-t1",

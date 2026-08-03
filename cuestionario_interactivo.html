@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario Interactivo - Programación Web (UF1303 / UF1304)</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --correct-bg: #dcfce7;
+            --correct-border: #16a34a;
+            --correct-text: #15803d;
+            --incorrect-bg: #fee2e2;
+            --incorrect-border: #dc2626;
+            --incorrect-text: #b91c1c;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            color: #1e3a8a;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .stats-bar {
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
+        }
+
+        .score-box {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+
+        .btn-reset {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-reset:hover {
+            background: var(--primary-hover);
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .question-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: transform 0.2s;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .question-number {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .question-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #0f172a;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+            background: #fff;
+        }
+
+        .option-item:hover:not(.disabled) {
+            border-color: var(--primary);
+            background: #f0f6ff;
+        }
+
+        .option-item input[type="radio"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Feedback States */
+        .option-item.correct {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-border) !important;
+            color: var(--correct-text) !important;
+            font-weight: 600;
+        }
+
+        .option-item.incorrect {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-border) !important;
+            color: var(--incorrect-text) !important;
+        }
+
+        .option-item.disabled {
+            cursor: default;
+            opacity: 0.8;
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: none;
+            line-height: 1.5;
+        }
+
+        .explanation.visible-correct {
+            display: block;
+            background: #f0fdf4;
+            border-left: 4px solid var(--correct-border);
+            color: #166534;
+        }
+
+        .explanation.visible-incorrect {
+            display: block;
+            background: #fef2f2;
+            border-left: 4px solid var(--incorrect-border);
+            color: #991b1b;
+        }
+
+        code {
+            background: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            color: #0f172a;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Cuestionario de Evaluación: Programación Web</h1>
+        <p class="subtitle">HTML, CSS, Formularios, Plantillas y CMS (UF1303 / UF1304)</p>
+    </header>
+
+    <div class="stats-bar">
+        <div class="score-box" id="score-display">Puntuación: 0 / 0 (0%)</div>
+        <button class="btn-reset" onclick="resetQuiz()">Reiniciar Test</button>
+    </div>
+
+    <div class="filter-tabs">
+        <button class="tab-btn active" onclick="filterCategory('all', this)">Todas las Preguntas</button>
+        <button class="tab-btn" onclick="filterCategory('uf1304-t1', this)">UF1304 Test 1</button>
+        <button class="tab-btn" onclick="filterCategory('uf1304-t2', this)">UF1304 Test 2</button>
+        <button class="tab-btn" onclick="filterCategory('uf1304-final', this)">UF1304 Final</button>
+        <button class="tab-btn" onclick="filterCategory('uf1303', this)">UF1303 CSS & HTML</button>
+        <button class="tab-btn" onclick="filterCategory('eval-diag', this)">Evaluación Continua</button>
+    </div>
+
+    <div id="quiz-container">
+        <!-- Las preguntas se cargarán aquí mediante JavaScript -->
+    </div>
+</div>
+
+<script>
+const questionsData = [
+    // UF1304 TEST 1
+    {
+        cat: "uf1304-t1",
+        section: "UF1304 - Test 1",
+        q: "¿Qué es una página web dinámica?",
+        options: [
+            "La que genera los contenidos en función de la hora del día.",
+            "La que genera los contenidos en función de los datos que introduce el servidor.",
+            "La que genera los contenidos en función de los datos que introduce el usuario.",
+            "La que genera los contenidos en función del tamaño de la pantalla."
+        ],
+        correct: 2,
+        exp: "Una página web dinámica genera y adapta su contenido en función de los datos o interacciones del usuario."
+    },
+    {
+        cat: "uf1304-t1",
+        section: "UF1304 - Test 1",
+        q: "¿Qué es la etiqueta <code>&lt;form&gt;</code>?",
+        options: [
+            "Es la etiqueta que delimita y engloba a los elementos del formulario.",
+            "Es la etiqueta que se utiliza para dar forma al aspecto del formulario.",
+            "Es la etiqueta HTML que se utiliza para mostrar imágenes de extensión .form.",
+            "Es una etiqueta inexistente en HTML."
+        ],
+        correct: 0,
+        exp: "La etiqueta <code>&lt;form&gt;</code> delimita la estructura receptora de todos los elementos y controles del formulario."
+    },
+    {
+        cat: "uf1304-t1",
+        section: "UF1304 - Test 1",
+        q: "¿Cuál es la función del botón de envío creado usando el atributo INPUT con el tipo SUBMIT?",
+        options: [
+            "Indicar cuándo se debe enviar la información del formulario al servidor.",
+            "Borrar todos los datos del formulario.",
+            "Subir a la parte más superior del formulario.",
+            "No tiene ninguna función específica."
+        ],
+        correct: 0,
+        exp: "El tipo <code>submit</code> envía los datos completados en el formulario hacia el servidor para su procesamiento."
+    },
+    {
+        cat: "uf1304-t1",
+        section: "UF1304 - Test 1",
+        q: "¿Con qué etiqueta se declaran los elementos de una lista desplegable?",
+        options: [
+            "La etiqueta: SELECT",
+            "La etiqueta: OPTION",
+            "La etiqueta: OPTGROUP",
+            "La etiqueta: FORM"
+        ],
+        correct: 1,
+        exp: "Cada elemento dentro de una lista <code>&lt;select&gt;</code> se declara mediante la etiqueta <code>&lt;option&gt;</code>."
+    },
+    {
+        cat: "uf1304-t1",
+        section: "UF1304 - Test 1",
+        q: "¿Cuál es la gran diferencia entre las casillas de verificación (checkbox) y los botones de opción (radio)?",
+        options: [
+            "No existen diferencias entre ambas.",
+            "Permiten proporcionar varias opciones al usuario final.",
+            "Todas las opciones de las casillas de verificación son excluyentes entre sí.",
+            "Todas las opciones de los botones de opción son excluyentes entre sí."
+        ],
+        correct: 3,
+        exp: "Los botones radio permiten elegir una única opción entre varias excluyentes; las casillas permiten selección múltiple."
+    },
+    {
+        cat: "uf1304-t1",
+        section: "UF1304 - Test 1",
+        q: "¿Cuál es la principal diferencia entre los cuadros de contraseña y los de texto?",
+        options: [
+            "Los campos de texto tienen varias líneas y los de contraseña solo una.",
+            "Los campos de texto y los campos de contraseña son iguales.",
+            "Los caracteres de los campos de contraseña no se ven a simple vista.",
+            "Los campos de contraseña son campos obligatorios en un formulario."
+        ],
+        correct: 2,
+        exp: "En los campos de tipo <code>password</code>, los caracteres se ocultan con puntos o asteriscos por privacidad."
+    },
+    {
+        cat: "uf1304-t1",
+        section: "UF1304 - Test 1",
+        q: "¿Qué etiqueta es necesaria para nombrar a una agrupación de datos dentro de un formulario?",
+        options: [
+            "La etiqueta FIELDSET",
+            "La etiqueta LEGEND",
+            "La etiqueta GROUP",
+            "La etiqueta NAME"
+        ],
+        correct: 1,
+        exp: "Mientras que <code>&lt;fieldset&gt;</code> agrupa los datos, la etiqueta <code>&lt;legend&gt;</code> establece su título."
+    },
+    {
+        cat: "uf1304-t1",
+        section: "UF1304 - Test 1",
+        q: "¿Cuál es el atributo que se añade a los elementos de los formularios para que un campo deba ser rellenado obligatoriamente?",
+        options: [
+            "OBLIGATORY.",
+            "MANDATORY.",
+            "DEFAULT.",
+            "REQUIRED."
+        ],
+        correct: 3,
+        exp: "El atributo booleano <code>required</code> valida de forma nativa que el campo no permanezca vacío al enviar."
+    },
+    {
+        cat: "uf1304-t1",
+        section: "UF1304 - Test 1",
+        q: "¿Cuál es la máxima que debe cumplirse siempre que se programa cualquier tipo de formulario?",
+        options: [
+            "Se debe asumir que el usuario final no va a tener ningún conocimiento de informática.",
+            "Se debe programar siempre sin utilizar la etiqueta form.",
+            "Se deben poner siempre más campos de los necesarios para incluir más información.",
+            "Se debe evitar incluir, siempre que sea posible, un botón de tipo submit."
+        ],
+        correct: 0,
+        exp: "La usabilidad exige diseñar interfaces intuitivas que no presupongan conocimientos técnicos por parte del usuario."
+    },
+    {
+        cat: "uf1304-t1",
+        section: "UF1304 - Test 1",
+        q: "¿De qué dos formas se pueden programar las páginas de confirmación de envío del formulario?",
+        options: [
+            "En lenguaje HTML y lenguaje BASIC.",
+            "Usando los atributos de ID y DISABLED.",
+            "En el lado del servidor y en el lado del cliente mediante un script.",
+            "Solo se puede programar de una forma."
+        ],
+        correct: 2,
+        exp: "Se pueden procesar en el lado del servidor (lenguajes backend) o en el cliente (scripts como JavaScript)."
+    },
+
+    // UF1304 TEST 2
+    {
+        cat: "uf1304-t2",
+        section: "UF1304 - Test 2",
+        q: "¿Para qué sirven las aplicaciones destinadas para la creación, construcción, diseño y edición de páginas web?",
+        options: [
+            "Para facilitar el trabajo al programador y que pueda observar el proceso de su creación de forma visual.",
+            "Para eliminar el trabajo del programador y que no tenga que conocer ninguna línea de código del lenguaje web.",
+            "Para que el programador web pueda trabajar sin el uso de plantillas web y obtener páginas web del mismo aspecto visual.",
+            "Estas aplicaciones están obsoletas y no tienen uso en la actualidad."
+        ],
+        correct: 0,
+        exp: "Los editores web y visuales ayudan a estructurar y observar el progreso del diseño agilizando la maquetación."
+    },
+    {
+        cat: "uf1304-t2",
+        section: "UF1304 - Test 2",
+        q: "¿Para qué están diseñadas las plantillas?",
+        options: [
+            "Para hacer código más complicado del que puede hacer el programador.",
+            "Para introducir mucho código de programación web en menos espacio.",
+            "Para poder hacer las mismas aplicaciones web en lenguajes de programación distintos.",
+            "Para ahorrarle tiempo al programador."
+        ],
+        correct: 3,
+        exp: "Las plantillas permiten reutilizar código previo facilitando una base estructural rápida."
+    },
+    {
+        cat: "uf1304-t2",
+        section: "UF1304 - Test 2",
+        q: "¿Qué tienen en común los elementos modificables en una plantilla?",
+        options: [
+            "Todos deben empezar con la misma inicial para poder ser identificados.",
+            "Deben ser nombrados de forma que se sepa claramente qué función cumplen en la plantilla.",
+            "Deben estar programados en el mismo lenguaje de programación.",
+            "Tienen una extensión común específica."
+        ],
+        correct: 1,
+        exp: "Un nombre claro y semántico permite al desarrollador identificarlos y editarlos sin errores."
+    },
+    {
+        cat: "uf1304-t2",
+        section: "UF1304 - Test 2",
+        q: "¿Por qué hay plantillas que no deben modificarse?",
+        options: [
+            "Porque el código es fijo.",
+            "Porque el código no es fijo.",
+            "Porque el código no puede ser modificado en una plantilla.",
+            "Porque el código es abstracto."
+        ],
+        correct: 0,
+        exp: "Ciertas plantillas poseen código fijo concebido para funcionar como bloque base inviolable."
+    },
+    {
+        cat: "uf1304-t2",
+        section: "UF1304 - Test 2",
+        q: "¿Cuál es la gran ventaja de la utilización de una plantilla básica al crear una nueva página de HTML?",
+        options: [
+            "No necesita demasiados comentarios para indicarle a futuros programadores qué es cada cosa.",
+            "El programador podrá usar la misma estructura de la plantilla básica para crear la página web.",
+            "Podrá incluir el lenguaje con otros lenguajes web como JavaScript o PHP con más facilidad.",
+            "No tiene ventajas."
+        ],
+        correct: 0,
+        exp: "Al seguir un estándar muy claro, requiere mínima documentación interna para entender su orden."
+    },
+    {
+        cat: "uf1304-t2",
+        section: "UF1304 - Test 2",
+        q: "¿Cómo se crean los comentarios en HTML?",
+        options: [
+            "Igual que en JavaScript.",
+            "Igual que en PHP.",
+            "Igual que en JavaScript y PHP.",
+            "De forma distinta que en JavaScript y PHP."
+        ],
+        correct: 3,
+        exp: "HTML usa <code>&lt;!-- comentario --&gt;</code>, diferenciándose de la sintaxis <code>//</code> o <code>/* */</code> empleada en JS y PHP."
+    },
+    {
+        cat: "uf1304-t2",
+        section: "UF1304 - Test 2",
+        q: "¿Qué es un campo modificable o susceptible de cambio en una plantilla?",
+        options: [
+            "Un campo que nunca debe ser modificado por el programador que utiliza la plantilla.",
+            "Un campo que debe ser modificado por el programador que utiliza la plantilla cuando aplica su código.",
+            "Un campo que debe ser modificado por el creador de la plantilla cuando diseña la propia plantilla.",
+            "Un campo que no debe ser modificado por el creador de la plantilla."
+        ],
+        correct: 1,
+        exp: "Son los bloques destinados a albergar el contenido específico y variable aportado por el programador."
+    },
+    {
+        cat: "uf1304-t2",
+        section: "UF1304 - Test 2",
+        q: "¿Qué es un campo no modificable o que no debe ser cambiado en una plantilla?",
+        options: [
+            "Un campo que nunca debe ser modificado por el programador que utiliza la plantilla.",
+            "Un campo que debe ser modificado por el programador que utiliza la plantilla.",
+            "Un campo que debe ser modificado por el creador de la plantilla.",
+            "Un campo que no debe ser modificado por el creador de la plantilla."
+        ],
+        correct: 0,
+        exp: "Son partes fijas del diseño o lógica que deben permanecer intactas para no desestructurar la web."
+    },
+    {
+        cat: "uf1304-t2",
+        section: "UF1304 - Test 2",
+        q: "¿Qué es un CMS o Sistema de Gestión de Contenidos?",
+        options: [
+            "Es un elemento de las plantillas especialmente diseñado para la creación de contenidos por el programador web.",
+            "Es un lenguaje de programación diseñado para la creación de sitios web.",
+            "Es un programa que permite, vía web, crear una estructura fija y visual para la creación y posterior administración de contenidos web.",
+            "Es una herramienta utilizada en internet para la creación interactiva en la nube."
+        ],
+        correct: 2,
+        exp: "Un CMS (ej. WordPress) proporciona una plataforma para gestionar y publicar páginas web dinámicas sin codificar de cero."
+    },
+    {
+        cat: "uf1304-t2",
+        section: "UF1304 - Test 2",
+        q: "Antes de realizar un cambio en una página web aplicando una plantilla encontrada en la red, ¿qué es lo más importante que se debe hacer?",
+        options: [
+            "Una copia de seguridad.",
+            "Comprobar el código de la plantilla.",
+            "Comprobar el código del programa web.",
+            "Leerse las especificaciones de la plantilla."
+        ],
+        correct: 0,
+        exp: "Realizar un backup previene la pérdida indeseada de datos si la plantilla genera algún conflicto."
+    },
+
+    // UF1304 FINAL
+    {
+        cat: "uf1304-final",
+        section: "UF1304 - Test Final",
+        q: "¿Dónde deben enviarse los datos que un usuario introduce en un formulario?",
+        options: [
+            "A un servidor para su procesamiento.",
+            "A una página web enlace.",
+            "A un sitio web programado en el mismo lenguaje del formulario.",
+            "Los datos de los formularios no deben enviarse a ningún sitio."
+        ],
+        correct: 0,
+        exp: "Los formularios recopilan datos para transmitirlos al servidor (backend) y procesar la petición."
+    },
+    {
+        cat: "uf1304-final",
+        section: "UF1304 - Test Final",
+        q: "¿Cuáles son las dos etiquetas más importantes para la elaboración de formularios en código HTML?",
+        options: [
+            "<form> y <button>.",
+            "<form> y <fieldset>.",
+            "<form> y <input>.",
+            "<button> y <input>"
+        ],
+        correct: 2,
+        exp: "<code>&lt;form&gt;</code> actúa como contenedor y <code>&lt;input&gt;</code> es el elemento de entrada de datos multifunción más utilizado."
+    },
+    {
+        cat: "uf1304-final",
+        section: "UF1304 - Test Final",
+        q: "¿Cuál es el valor por defecto del atributo method de la etiqueta form?",
+        options: [
+            "Get.",
+            "Post.",
+            "Send.",
+            "No tiene valor por defecto."
+        ],
+        correct: 0,
+        exp: "En HTML, si no se especifica el método de envío en el formulario, se adopta <code>GET</code> por defecto."
+    },
+    {
+        cat: "uf1304-final",
+        section: "UF1304 - Test Final",
+        q: "¿Cuál es el valor por defecto del atributo target de la etiqueta form?",
+        options: [
+            "_blank.",
+            "_self.",
+            "_parent.",
+            "No tiene valor por defecto."
+        ],
+        correct: 1,
+        exp: "Por defecto es <code>_self</code>, cargando la respuesta del servidor en la misma pestaña."
+    },
+    {
+        cat: "uf1304-final",
+        section: "UF1304 - Test Final",
+        q: "¿De qué se debe ser consciente cuando se programa cualquier elemento del formulario?",
+        options: [
+            "De que su sintaxis sirva en todos los lenguajes web.",
+            "De en qué navegador se va a mostrar la web final.",
+            "De la longitud máxima que puede tener de atributos ese elemento.",
+            "De su objetivo final y de su uso."
+        ],
+        correct: 3,
+        exp: "Cada control del formulario debe responder a una finalidad clara y facilitar la experiencia del usuario."
+    },
+    {
+        cat: "uf1304-final",
+        section: "UF1304 - Test Final",
+        q: "¿Se puede programar indistintamente en mayúsculas y minúsculas en la programación web?",
+        options: [
+            "Sí, en todo caso.",
+            "Sí, pero si se programa en HTML.",
+            "Sí, pero si se programa en PHP.",
+            "No, de ninguna manera."
+        ],
+        correct: 1,
+        exp: "Las etiquetas HTML no son sensibles a mayúsculas/minúsculas, aunque se recomienda usar minúsculas por estándar."
+    },
+    {
+        cat: "uf1304-final",
+        section: "UF1304 - Test Final",
+        q: "¿Para qué se utiliza la etiqueta &lt;TEXTAREA&gt;?",
+        options: [
+            "Para definir o declarar un cuadro de texto de una línea.",
+            "Para definir o declarar un cuadro de texto más grande que una línea.",
+            "Para definir o declarar un cuadro de contraseña de una línea.",
+            "Para definir o declarar un cuadro de contraseña más grande que una línea."
+        ],
+        correct: 1,
+        exp: "<code>&lt;textarea&gt;</code> define entradas multilínea para bloques extensos de texto."
+    },
+    {
+        cat: "uf1304-final",
+        section: "UF1304 - Test Final",
+        q: "De cara al usuario, ¿cómo es la programación del tamaño, columnas y filas de los formularios?",
+        options: [
+            "Totalmente transparente.",
+            "Totalmente opaca.",
+            "Totalmente estática.",
+            "Totalmente dinámica."
+        ],
+        correct: 1,
+        exp: "El cliente ve únicamente el campo renderizado, siendo la estructura técnica y dimensiones internas transparentes u opacas al usuario."
+    },
+    {
+        cat: "uf1304-final",
+        section: "UF1304 - Test Final",
+        q: "¿Qué diferencia hay entre los elementos de un formulario, los campos de un formulario y los controles de un formulario?",
+        options: [
+            "Los campos son rellenables por el usuario, los otros no.",
+            "Los elementos se refiere a toda etiqueta del formulario, al contrario que las otras dos.",
+            "Los controles permiten dirigir el flujo de información del formulario, al contrario que los otros dos.",
+            "Son lo mismo."
+        ],
+        correct: 3,
+        exp: "En la terminología habitual de formularios HTML se usan de manera equivalente."
+    },
+    {
+        cat: "uf1304-final",
+        section: "UF1304 - Test Final",
+        q: "¿Qué es el código ofuscado?",
+        options: [
+            "Código realizado de forma tan enrevesada que es imposible de descifrarlo.",
+            "Código que realiza unas funciones específicas que sólo puede realizar él.",
+            "Código lo más largo posible para realizar la misma función que otro similar.",
+            "Es como se denomina normalmente al código de los sitios web."
+        ],
+        correct: 0,
+        exp: "La ofuscación altera el código fuente para dificultar su lectura y comprensión por parte de terceros."
+    },
+    {
+        cat: "uf1304-final",
+        section: "UF1304 - Test Final",
+        q: "¿Qué ocurre cuando se crea un botón con el elemento INPUT y el atributo SUBMIT si no se le asigna ningún valor al atributo VALUE?",
+        options: [
+            "No compila la página web.",
+            "Muestra un botón sin texto.",
+            "Muestra el valor por defecto.",
+            "No se puede crear un botón con el elemento INPUT y el atributo SUBMIT si no se le asigna valor."
+        ],
+        correct: 2,
+        exp: "El navegador aplica automáticamente el texto estándar por defecto (como 'Enviar' o 'Submit')."
+    },
+    {
+        cat: "uf1304-final",
+        section: "UF1304 - Test Final",
+        q: "¿Qué permite el atributo MULTIPLE cuando se utiliza con el elemento SELECT?",
+        options: [
+            "Seleccionar múltiples veces el mismo valor de una lista desplegable.",
+            "Seleccionar múltiples veces distintas opciones de una lista desplegable.",
+            "Seleccionar múltiples veces una selección de una base de datos.",
+            "Este atributo no pertenece al elemento SELECT."
+        ],
+        correct: 1,
+        exp: "El atributo <code>multiple</code> habilita la selección simultánea de varios ítems en la lista desplegable."
+    },
+    {
+        cat: "uf1304-final",
+        section: "UF1304 - Test Final",
+        q: "¿Qué orden de tabulación tienen los elementos a los que no se les ha asignado el atributo tabindex?",
+        options: [
+            "Conservan el orden de tabulación normal.",
+            "Se les asigna un orden de tabulación en función de los elementos que lo tienen asignado.",
+            "Se considera que tienen el mismo orden de tabulación que el elemento más afín.",
+            "No tienen orden de tabulación."
+        ],
+        correct: 0,
+        exp: "Siguen la secuencia de orden natural de navegación según su posición en el código HTML."
+    },
+    {
+        cat: "uf1304-final",
+        section: "UF1304 - Test Final",
+        q: "¿Cuál es el valor por defecto del atributo align en la etiqueta &lt;LEGEND&gt;?",
+        options: [
+            "Top.",
+            "Bottom.",
+            "Left.",
+            "Right."
+        ],
+        correct: 2,
+        exp: "La alineación por defecto del texto dentro de la leyenda del fieldset es a la izquierda (<code>left</code>)."
+    },
+    {
+        cat: "uf1304-final",
+        section: "UF1304 - Test Final",
+        q: "¿Qué elementos existen en los formularios web que no existen en los formularios reales?",
+        options: [
+            "Campos de texto y listas desplegables.",
+            "Campos de texto y botones.",
+            "Listas desplegables y casillas de verificación.",
+            "Listas desplegables y botones."
+        ],
+        correct: 3,
+        exp: "Las listas desplegables dinámicas y los botones de acción interactivos son elementos propios del medio digital."
+    },
+
+    // UF1303 TEST 1 & FINAL
+    {
+        cat: "uf1303",
+        section: "UF1303 - Hojas de Estilo CSS",
+        q: "¿Cómo enlazamos un archivo CSS a nuestro documento HTML?",
+        options: [
+            "Con la etiqueta <a>",
+            "Usando la etiqueta <link> desde la cabecera de cada documento",
+            "Con la etiqueta <a href>",
+            "No se puede enlazar."
+        ],
+        correct: 1,
+        exp: "Se usa <code>&lt;link rel='stylesheet' href='estilos.css'&gt;</code> dentro de la cabecera <code>&lt;head&gt;</code>."
+    },
+    {
+        cat: "uf1303",
+        section: "UF1303 - Hojas de Estilo CSS",
+        q: "¿Qué determina el atributo rel dentro del enlace que debemos poner para enlazar una hoja de estilos?",
+        options: [
+            "La URL.",
+            "El tipo de recurso enlazado.",
+            "El tipo de relación que hay entre el recurso enlazado y el documento HTML.",
+            "La ruta."
+        ],
+        correct: 2,
+        exp: "Indica la relación; para hojas de estilo se define como <code>rel='stylesheet'</code>."
+    },
+    {
+        cat: "uf1303",
+        section: "UF1303 - Hojas de Estilo CSS",
+        q: "¿Qué determina el atributo type dentro del enlace que debemos poner para enlazar una hoja de estilos?",
+        options: [
+            "La URL.",
+            "El tipo de relación.",
+            "La dirección.",
+            "El tipo de recurso enlazado."
+        ],
+        correct: 3,
+        exp: "El atributo <code>type</code> especifica el tipo MIME del documento vinculado, como <code>text/css</code>."
+    },
+    {
+        cat: "uf1303",
+        section: "UF1303 - Hojas de Estilo CSS",
+        q: "¿Qué determina el atributo href dentro del enlace que debemos poner para enlazar una hoja de estilos?",
+        options: [
+            "El tipo de relación.",
+            "El medio en el que el estilo se aplicará.",
+            "La URL del archivo CSS.",
+            "El tipo de recurso enlazado."
+        ],
+        correct: 2,
+        exp: "El atributo <code>href</code> indica la ubicación (ruta/URL) del archivo CSS externo."
+    },
+    {
+        cat: "uf1303",
+        section: "UF1303 - Hojas de Estilo CSS",
+        q: "¿Dónde se integra el estilo cuando está incrustado?",
+        options: [
+            "Enlazada a una hoja en línea.",
+            "En una hoja de estilos externa.",
+            "Dentro del documento HTML, en cualquier parte.",
+            "Dentro del documento HTML, en el encabezado."
+        ],
+        correct: 3,
+        exp: "El estilo incrustado se escribe dentro de la etiqueta <code>&lt;style&gt;</code> en el encabezado <code>&lt;head&gt;</code> del documento."
+    },
+    {
+        cat: "uf1303",
+        section: "UF1303 - Hojas de Estilo CSS",
+        q: "¿Qué regla se usa para importar una hoja de estilos y aplicarla a un documento HTML?",
+        options: [
+            ":import.",
+            "@import.",
+            "import.",
+            "import@."
+        ],
+        correct: 1,
+        exp: "La directiva <code>@import</code> permite cargar una hoja de estilo dentro de otra hoja o bloque de estilos."
+    },
+    {
+        cat: "uf1303",
+        section: "UF1303 - Hojas de Estilo CSS",
+        q: "¿De qué tipos pueden ser los selectores?",
+        options: [
+            "Selectores simples y Selectores contextuales.",
+            "Selectores simples y Selectores compuestos.",
+            "Selectores interiores y exteriores.",
+            "Selectores de Regla y de Valores."
+        ],
+        correct: 0,
+        exp: "Se clasifican principalmente en selectores simples (etiqueta, clase, id) y contextuales o descendientes."
+    },
+    {
+        cat: "uf1303",
+        section: "UF1303 - Hojas de Estilo CSS",
+        q: "¿Qué heredan los hijos en la propiedad de Herencia propia de los CSS?",
+        options: [
+            "Los hijos siempre heredan los estilos de sus padres.",
+            "Los hijos no heredan nada.",
+            "Los hijos heredan, la mayoría de las veces, los estilos de sus padres.",
+            "Los hijos heredan los estilos de otros hijos."
+        ],
+        correct: 2,
+        exp: "Propiedades como la fuente y el color se heredan por defecto, a menos que sean sobrescritas."
+    },
+    {
+        cat: "uf1303",
+        section: "UF1303 - Hojas de Estilo CSS",
+        q: "¿Qué atributo usamos para aplicar un estilo con el selector de clases?",
+        options: [
+            "El atributo clas.",
+            "El selector universal .",
+            "El atributo ID.",
+            "El atributo class."
+        ],
+        correct: 3,
+        exp: "Se usa el atributo HTML <code>class='nombre_clase'</code> que luego en CSS se selecciona con <code>.nombre_clase</code>."
+    },
+    {
+        cat: "uf1303",
+        section: "UF1303 - Hojas de Estilo CSS",
+        q: "¿Qué propiedad se utiliza para cambiar la fuente del texto?",
+        options: [
+            "font-weight.",
+            "font-family.",
+            "font-size.",
+            "font-style."
+        ],
+        correct: 1,
+        exp: "La propiedad <code>font-family</code> establece la tipografía del texto."
+    },
+    {
+        cat: "uf1303",
+        section: "UF1303 - Hojas de Estilo CSS",
+        q: "¿Con qué extensión guardamos nuestra hoja de estilos?",
+        options: [
+            ".html.",
+            ".css.",
+            ".htm.",
+            ".cs."
+        ],
+        correct: 1,
+        exp: "Los archivos de código CSS se guardan con la extensión <code>.css</code>."
+    },
+    {
+        cat: "uf1303",
+        section: "UF1303 - Hojas de Estilo CSS",
+        q: "¿Cómo indicamos un estilo para redondear las esquinas de un borde en CSS 3?",
+        options: [
+            "Border-circle.",
+            "Border-round.",
+            "Border-radius.",
+            "Border-top."
+        ],
+        correct: 2,
+        exp: "La propiedad CSS3 <code>border-radius</code> permite redondear los bordes de cualquier elemento."
+    },
+
+    // EVALUACIÓN CONTINUA
+    {
+        cat: "eval-diag",
+        section: "Evaluación Continua",
+        q: "Los _________ permiten que el usuario introduzca datos en el servidor para que sean procesados.",
+        options: [
+            "Formularios.",
+            "Móviles.",
+            "Ordenadores.",
+            "Scripts."
+        ],
+        correct: 0,
+        exp: "Los formularios permiten que el usuario introduzca datos que son procesados en el servidor."
+    },
+    {
+        cat: "eval-diag",
+        section: "Evaluación Continua",
+        q: "A la capacitación del receptor de un mensaje que está directamente relacionado con él, hasta el grado que establezca el emisor, se le denomina:",
+        options: [
+            "Interpretación.",
+            "Interpelación.",
+            "Interactividad.",
+            "Omnicanalidad."
+        ],
+        correct: 2,
+        exp: "La interactividad representa la capacidad del usuario para intervenir en el contenido o sistema."
+    },
+    {
+        cat: "eval-diag",
+        section: "Evaluación Continua",
+        q: "¿Qué opción no podría existir sin los formularios de alta?",
+        options: [
+            "Las redes sociales.",
+            "Los sitios web.",
+            "Las aplicaciones móviles.",
+            "Los portales informativos."
+        ],
+        correct: 0,
+        exp: "Las redes sociales requieren formularios para registrar usuarios y crear nuevos perfiles."
+    },
+    {
+        cat: "eval-diag",
+        section: "Evaluación Continua",
+        q: "¿Cuál es el CMS diseñado y programado específicamente para la creación de blogs?",
+        options: [
+            "Wordpress.",
+            "Drupal.",
+            "Joomla.",
+            "Wix."
+        ],
+        correct: 0,
+        exp: "WordPress nació originalmente como una plataforma orientada a la creación de blogs."
+    }
+];
+
+let userAnswers = {};
+let currentFilter = 'all';
+
+function renderQuestions() {
+    const container = document.getElementById('quiz-container');
+    container.innerHTML = '';
+
+    const filtered = currentFilter === 'all' 
+        ? questionsData 
+        : questionsData.filter(q => q.cat === currentFilter);
+
+    filtered.forEach((qObj, idx) => {
+        const qGlobalIndex = questionsData.indexOf(qObj);
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.id = `question-${qGlobalIndex}`;
+
+        const isAnswered = userAnswers.hasOwnProperty(qGlobalIndex);
+        const selectedOption = userAnswers[qGlobalIndex];
+
+        let optionsHTML = '';
+        qObj.options.forEach((opt, optIdx) => {
+            let optionClass = 'option-item';
+            let checkedAttr = '';
+
+            if (isAnswered) {
+                optionClass += ' disabled';
+                if (optIdx === qObj.correct) {
+                    optionClass += ' correct';
+                }
+                if (selectedOption === optIdx && selectedOption !== qObj.correct) {
+                    optionClass += ' incorrect';
+                }
+                if (selectedOption === optIdx) {
+                    checkedAttr = 'checked';
+                }
+            }
+
+            optionsHTML += `
+                <label class="${optionClass}" onclick="handleSelect(${qGlobalIndex}, ${optIdx})">
+                    <input type="radio" name="q-${qGlobalIndex}" ${checkedAttr} ${isAnswered ? 'disabled' : ''}>
+                    <span>${String.fromCharCode(97 + optIdx)}. ${opt}</span>
+                </label>
+            `;
+        });
+
+        let explanationHTML = '';
+        if (isAnswered) {
+            const isCorrect = selectedOption === qObj.correct;
+            const expClass = isCorrect ? 'explanation visible-correct' : 'explanation visible-incorrect';
+            const statusText = isCorrect ? '<strong>¡Correcto!</strong> ' : '<strong>Incorrecto.</strong> ';
+            explanationHTML = `<div class="${expClass}">${statusText}${qObj.exp}</div>`;
+        }
+
+        card.innerHTML = `
+            <div class="question-header">
+                <span class="question-number">${qObj.section} - Pregunta ${idx + 1}</span>
+            </div>
+            <div class="question-title">${qObj.q}</div>
+            <div class="options-list">${optionsHTML}</div>
+            ${explanationHTML}
+        `;
+
+        container.appendChild(card);
+    });
+
+    updateStats();
+}
+
+function handleSelect(questionIndex, optionIndex) {
+    if (userAnswers.hasOwnProperty(questionIndex)) return; // Ya respondida
+
+    userAnswers[questionIndex] = optionIndex;
+    renderQuestions();
+}
+
+function updateStats() {
+    const totalQuestions = questionsData.length;
+    const answeredCount = Object.keys(userAnswers).length;
+    let correctCount = 0;
+
+    Object.keys(userAnswers).forEach(qIdx => {
+        if (userAnswers[qIdx] === questionsData[qIdx].correct) {
+            correctCount++;
+        }
+    });
+
+    const percentage = answeredCount > 0 ? Math.round((correctCount / answeredCount) * 100) : 0;
+    document.getElementById('score-display').innerText = 
+        `Respuestas correctas: ${correctCount} / ${answeredCount} (Total test: ${totalQuestions}) - Aciertos: ${percentage}%`;
+}
+
+function filterCategory(cat, btn) {
+    currentFilter = cat;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderQuestions();
+}
+
+function resetQuiz() {
+    userAnswers = {};
+    renderQuestions();
+}
+
+// Inicializar al cargar
+document.addEventListener('DOMContentLoaded', renderQuestions);
+</script>
+
+</body>
+</html>

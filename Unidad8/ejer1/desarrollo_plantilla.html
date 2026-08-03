@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Examen</title>
+</head>
+
+<body>
+
+    <!-- INICIO DE LA PLANTILLA -->
+
+    <h1>Formulario de examen</h1>
+
+    <form action="resultado.html" method="post">
+        
+        <!-- ZONA 1: DATOS DEL ALUMNO -->
+        <fieldset>
+            <legend>Datos del alumno</legend>
+
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+        </fieldset>
+
+        <br>
+
+        <!-- ZONA 2: PREGUNTAS DE EXAMEN -->
+        <fieldset>
+            <legend>Preguntas de examen</legend>
+
+            <!-- Pregunta 1 -->
+            <p><strong>1. ¿Qué lenguaje se utiliza para estructurar una página web?</strong></p>
+
+            <input type="radio" id="p1a" name="pregunta1" value="HTML">
+            <label for="p1a">HTML</label><br>
+
+            <input type="radio" id="p1b" name="pregunta1" value="Python">
+            <label for="p1b">Python</label><br>
+
+            <input type="radio" id="p1c" name="pregunta1" value="Java">
+            <label for="p1c">Java</label>
+
+
+            <!-- Pregunta 2 -->
+            <p><strong>2. ¿Qué lenguaje se utiliza principalmente para dar estilos a una página web?</strong></p>
+
+            <input type="radio" id="p2a" name="pregunta2" value="CSS">
+            <label for="p2a">CSS</label><br>
+
+            <input type="radio" id="p2b" name="pregunta2" value="HTML">
+            <label for="p2b">HTML</label><br>
+
+            <input type="radio" id="p2c" name="pregunta2" value="SQL">
+            <label for="p2c">SQL</label>
+
+
+            <!-- Pregunta 3 -->
+            <p><strong>3. ¿Cuál de estos programas es un editor de texto?</strong></p>
+
+            <input type="radio" id="p3a" name="pregunta3" value="Notepad++">
+            <label for="p3a">Notepad++</label><br>
+
+            <input type="radio" id="p3b" name="pregunta3" value="Gimp">
+            <label for="p3b">Gimp</label><br>
+
+            <input type="radio" id="p3c" name="pregunta3" value="Photoshop">
+            <label for="p3c">Photoshop</label>
+
+
+            <!-- Pregunta 4 -->
+            <p><strong>4. ¿Qué etiqueta se utiliza para crear un enlace?</strong></p>
+
+            <input type="radio" id="p4a" name="pregunta4" value="a">
+            <label for="p4a">&lt;a&gt;</label><br>
+
+            <input type="radio" id="p4b" name="pregunta4" value="img">
+            <label for="p4b">&lt;img&gt;</label><br>
+
+            <input type="radio" id="p4c" name="pregunta4" value="table">
+            <label for="p4c">&lt;table&gt;</label>
+
+
+            <!-- Pregunta 5: RESPUESTA MÚLTIPLE -->
+            <p><strong>5. ¿Cuáles de los siguientes son lenguajes o tecnologías utilizados en páginas web?</strong></p>
+
+            <input type="checkbox" id="p5a" name="pregunta5[]" value="HTML">
+            <label for="p5a">HTML</label><br>
+
+            <input type="checkbox" id="p5b" name="pregunta5[]" value="CSS">
+            <label for="p5b">CSS</label><br>
+
+            <input type="checkbox" id="p5c" name="pregunta5[]" value="JavaScript">
+            <label for="p5c">JavaScript</label>
+
+        </fieldset>
+
+        <br>
+
+        <input type="submit" value="Enviar examen">
+        <input type="reset" value="Borrar">
+
+    </form>
+
+    <!-- FIN DE LA PLANTILLA -->
+
+</body>
+
+</html>

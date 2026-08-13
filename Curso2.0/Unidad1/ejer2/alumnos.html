@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Objeto Alumno - JavaScript</title>
+</head>
+<body>
+
+  <h1>Gestión de alumnos con JavaScript</h1>
+  <div id="salida"></div>
+  <!-- div#salida: contenedor donde el método imprimir() mostrará los datos -->
+
+  <script>
+
+    // ── 1. Definición del objeto Alumno ──────────────────────────
+    // Constructor: recibe nombre y edad como parámetros.
+    // La propiedad numeroMatricula se inicializa como null
+    // hasta que se llame al método matricular().
+    function Alumno(nombre, edad) {
+      this.nombre = nombre;
+      this.edad = edad;
+      this.numeroMatricula = null;
+    }
+
+    // ── 2. Método matricular ─────────────────────────────────────
+    // Asigna un número de matrícula al alumno.
+    Alumno.prototype.matricular = function(numero) {
+      this.numeroMatricula = numero;
+    };
+
+    // ── 3. Método imprimir ───────────────────────────────────────
+    // Muestra los datos del alumno en el div#salida de la página.
+    Alumno.prototype.imprimir = function() {
+      var salida = document.getElementById('salida');
+      salida.innerHTML += '<p>'
+        + '<strong>Nombre:</strong> ' + this.nombre + ' | '
+        + '<strong>Edad:</strong> ' + this.edad + ' años | '
+        + '<strong>Nº Matrícula:</strong> ' + this.numeroMatricula
+        + '</p>';
+    };
+
+    // ── 5. Crear alumno Juan Fernández ───────────────────────────
+    var alumno1 = new Alumno('Juan Fernández', 15);
+
+    // ── 6. Asignar número de matrícula a Juan ───────────────────
+    alumno1.matricular(27001);
+
+    // ── 7. Mostrar datos de Juan Fernández ───────────────────────
+    alumno1.imprimir();
+
+    // ── 8. Crear alumna María Jiménez y asignarle matrícula ─────
+    var alumno2 = new Alumno('María Jiménez', 17);
+    alumno2.matricular(34002);
+
+    // ── 9. Mostrar datos de los 2 alumnos ────────────────────────
+    alumno2.imprimir();
+
+
+
+  </script>
+
+</body>
+</html>

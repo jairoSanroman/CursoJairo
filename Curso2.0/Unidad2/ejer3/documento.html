@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documento HTML con JavaScript</title>
+ 
+
+  <script>
+ //  a. Función para mostrar fecha y hora
+ // La función necesaria es el objeto Date() de JavaScript. Al crear una instancia con new Date() se obtiene un objeto con la fecha y hora actuales del sistema. Sus métodos principales son:
+ // getHours() — devuelve las horas actuales (0-23).
+ // getMinutes() — devuelve los minutos actuales (0-59).
+ // getSeconds() — devuelve los segundos (0-59).
+ // getDate() — devuelve el día del mes (1-31).
+ // getMonth() — devuelve el mes (0-11, siendo 0 enero).
+ // getFullYear() — devuelve el año con 4 dígitos.
+
+
+
+//No necesita parámetros: var ahora = new Date(); es suficiente para obtener la fecha y hora del momento en que se ejecuta.
+    // b. Al cargar la página se guarda la hora de carga
+    // Se usa el objeto Date() para obtener la fecha y hora actuales.
+    // getHours() devuelve las horas (0-23) y getMinutes() los minutos (0-59).
+    var ahora = new Date();
+    var horasCarga = ahora.getHours();
+    var minutosCarga = ahora.getMinutes();
+//c. Método document.write()
+//El método document.write() escribe directamente en el documento HTML en el punto donde se encuentra el script. Recibe como parámetro una cadena de texto (string) que puede incluir etiquetas HTML. Por ejemplo:
+//document.write("<p>Hola mundo</p>");
+
+    // d. Función escribirDespedida()
+    // No necesita parámetros porque siempre muestra el mismo texto fijo.
+    function escribirDespedida() {
+      document.write("Hasta la próxima visitante");
+    }
+
+    // f. Función mostrarHoraActual()
+    // Obtiene la hora actual en el momento de pulsar el botón
+    // y la muestra en una ventana emergente (alert).
+    function mostrarHoraActual() {
+      var horaActual = new Date();
+      var horas = horaActual.getHours();
+      var minutos = horaActual.getMinutes();
+      alert("Son las " + horas + " horas y " + minutos + " minutos");
+    }
+
+  </script>
+
+</head>
+<body>
+
+  <h1>Documento HTML con JavaScript</h1>
+
+  <script>
+    // b. Muestra en la página la hora a la que se cargó
+    // document.write() escribe directamente en el documento HTML.
+    // Recibe como parámetro el texto (cadena) que se quiere mostrar.
+    document.write("<p>La página web se ha cargado a las "
+      + horasCarga + " horas y " + minutosCarga + " minutos.</p>");
+  </script>
+
+  <!-- e. Botón Salir: al pulsarlo ejecuta escribirDespedida() -->
+  <button onclick="escribirDespedida()">Salir</button>
+  <!-- onclick: evento que ejecuta la función al hacer clic sobre el botón -->
+
+  <br><br>
+
+  <!-- g. Botón ¿Qué hora es?: al pulsarlo ejecuta mostrarHoraActual() -->
+  <button onclick="mostrarHoraActual()">¿Qué hora es?</button>
+
+</body>
+</html>

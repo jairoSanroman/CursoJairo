@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suma de números</title>
+
+  <script>
+    // SCRIPT DIFERIDO: se define en el <head> pero las funciones
+    // solo se ejecutan cuando el usuario pulsa un botón.
+
+    // Variables globales para almacenar los dos números
+    var numero1 = 0;
+    var numero2 = 0;
+
+    // Función que pide el primer número al usuario
+    function pedirNumero1() {
+      // prompt(): muestra una ventana de entrada de datos al usuario.
+      // Recibe como parámetro el mensaje a mostrar.
+      // Devuelve el valor introducido como cadena de texto.
+      numero1 = parseFloat(prompt("Introduce el primer número:"));
+    }
+
+    // Función que pide el segundo número al usuario
+    function pedirNumero2() {
+      numero2 = parseFloat(prompt("Introduce el segundo número:"));
+    }
+
+    // Función que calcula la suma y muestra el resultado en la página
+    function mostrarSuma() {
+      var resultado = numero1 + numero2;
+      // document.getElementById(): accede al elemento HTML con el id indicado
+      document.getElementById("resultado").innerHTML =
+        "El resultado de la suma es: <strong>" + resultado + "</strong>";
+    }
+  </script>
+
+</head>
+
+<!-- SCRIPT INMEDIATO: onload se ejecuta en el momento en que la página termina de cargarse -->
+<body onload="alert('Bienvenido a la página que realiza sumas')">
+
+  <h1>Suma de números</h1>
+
+  <!-- Botón 1: llama a pedirNumero1() al pulsarlo -->
+  <button onclick="pedirNumero1()">Introducir primer número</button>
+
+  <!-- Botón 2: llama a pedirNumero2() al pulsarlo -->
+  <button onclick="pedirNumero2()">Introducir segundo número</button>
+
+  <br><br>
+
+  <!-- Botón 3: llama a mostrarSuma() al pulsarlo -->
+  <button onclick="mostrarSuma()">Mostrar resultado</button>
+
+  <br><br>
+
+  <!-- Elemento donde se mostrará el resultado -->
+  <p id="resultado"></p>
+  <!-- El párrafo comienza vacío y se rellena con innerHTML desde mostrarSuma() -->
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculando datos</title>
+</head>
+
+<body>
+
+<script>
+
+// a. Factorial de 6 usando FOR
+
+var factorial = 1;
+
+for (var i = 1; i <= 6; i++) {
+    factorial = factorial * i;
+}
+
+document.write("a) Factorial de 6: " + factorial + "<br><br>");
+
+
+// b. Múltiplos de 5 hasta el 30 usando WHILE
+
+var numero = 5;
+
+document.write("b) Múltiplos de 5 hasta el 30: ");
+
+while (numero <= 30) {
+    document.write(numero + " ");
+    numero = numero + 5;
+}
+
+document.write("<br><br>");
+
+
+// c. Producto de los 10 primeros números impares usando DO-WHILE
+
+var producto = 1;
+var impar = 1;
+var contador = 0;
+
+do {
+    producto = producto * impar;
+    impar = impar + 2;
+    contador++;
+} while (contador < 10);
+
+document.write("c) Producto de los 10 primeros números impares: " + producto);
+
+</script>
+<script>
+
+var resultado1 = 30 << 3;
+var resultado2 = 10 << 1;
+var resultado3 = 150 >> 4;
+var resultado4 = 100 >> 2;
+
+document.write("<br><br>");
+document.write("30 x 8 = " + resultado1 + "<br>");
+document.write("10 x 2 = " + resultado2 + "<br>");
+document.write("150 / 16 = " + resultado3 + "<br>");
+document.write("100 / 4 = " + resultado4);
+
+</script>
+</body>
+</html>

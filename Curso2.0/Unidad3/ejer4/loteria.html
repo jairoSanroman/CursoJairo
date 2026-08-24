@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Simulador de lotería</title>
+</head>
+
+<body>
+
+    <h1>Simulador de lotería</h1>
+
+    <button onclick="generarNumero()">Generar número Aleatorio</button>
+
+    <button onclick="comprobarNumero()">Comprobar número</button>
+
+
+    <script>
+
+        // Genera un número aleatorio de 5 dígitos
+        function generarNumero() {
+
+            var numero = "";
+
+            for (var i = 0; i < 5; i++) {
+                numero = numero + Math.floor(Math.random() * 10);
+            }
+
+            alert("Número aleatorio: " + numero);
+        }
+
+
+        // Comprueba el número premiado y el número jugado
+        function comprobarNumero() {
+
+            var premiado = prompt("Introduce el número premiado (5 dígitos):");
+            var jugado = prompt("Introduce el número jugado (5 dígitos):");
+
+            var premio = 0;
+
+            // Premio de 5000 €
+            if (premiado == jugado) {
+                premio = 5000;
+            }
+
+            // Premio de 500 €
+            else if (premiado.substring(1) == jugado.substring(1)) {
+                premio = 500;
+            }
+
+            // Premio de 50 €
+            else if (premiado.substring(2) == jugado.substring(2)) {
+                premio = 50;
+            }
+
+            // Premio de 5 €
+            else if (premiado.substring(3) == jugado.substring(3)) {
+                premio = 5;
+            }
+
+            // Premio de 1 € si coincide la primera o última cifra
+            else if (premiado.charAt(0) == jugado.charAt(0) ||
+                     premiado.charAt(4) == jugado.charAt(4)) {
+                premio = 1;
+            }
+
+            // Mostrar resultado
+            if (premio > 0) {
+                alert("¡Premio! Has ganado " + premio + " €");
+            } else {
+                alert("No premiado");
+            }
+        }
+
+    </script>
+
+</body>
+</html>

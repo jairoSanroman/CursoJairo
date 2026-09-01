@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propiedades del navegador</title>
+
+  <script>
+    // Función propiedadesNavegador()
+    // Muestra en una ventana emergente información sobre el navegador
+    // usando el objeto navigator de JavaScript.
+    // No necesita parámetros porque accede directamente al objeto global navigator.
+    function propiedadesNavegador() {
+
+      // a. navigator.appCodeName: código del navegador
+      // Devuelve el nombre en código del navegador (normalmente "Mozilla")
+      var codigo = "Código del navegador: " + navigator.appCodeName;
+
+      // b. navigator.platform: plataforma sobre la que se ejecuta el script
+      // Devuelve el sistema operativo del usuario (ej: "Win32", "Linux x86_64")
+      var plataforma = "Plataforma: " + navigator.platform;
+
+      // c. navigator.cookieEnabled: indica si las cookies están habilitadas
+      // Devuelve true si las cookies están activadas, false si están desactivadas
+      var cookies = "Cookies habilitadas: " + (navigator.cookieEnabled ? "Sí" : "No");
+
+      // d. Se agrupan todos los datos en un único alert con saltos de línea
+      alert(codigo + "\n" + plataforma + "\n" + cookies);
+    }
+  </script>
+
+</head>
+<body>
+
+  <h1>Propiedades del navegador</h1>
+
+  <!-- Botón que ejecuta la función propiedadesNavegador() al hacer clic -->
+  <button onclick="propiedadesNavegador()">Propiedades del navegador</button>
+  <!-- onclick: evento que llama a la función cuando el usuario pulsa el botón -->
+
+</body>
+</html>

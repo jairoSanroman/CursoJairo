@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio JavaScript - Ventana con Frames</title>
+    <script>
+        /**
+         * Función dividirVentana()
+         * --------------------------------------------------------------------
+         * 1. Abre una nueva ventana del navegador mediante window.open().
+         * 2. Escribe dinámicamente una estructura de marcos (<frameset>) dentro 
+         *    del documento de la ventana recién creada.
+         * 3. Define dos filas (rows) al 50% de la altura/ancho cada una para que
+         *    se ajusten al tamaño de la nueva ventana.
+         * 4. Asigna las URLs requeridas (Google y Bing) a cada uno de los frames.
+         * --------------------------------------------------------------------
+         */
+        function dividirVentana() {
+            // Abre una ventana emergente en blanco con dimensiones iniciales
+            var nuevaVentana = window.open("", "VentanaDividida", "width=800,height=600");
+
+            // Escribe la estructura de marcos dentro del documento de la nueva ventana
+            nuevaVentana.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Ventana Dividida</title>
+                </head>
+                <!-- Define 2 filas que ocupan el 50% cada una para ajustarse al alto/ancho -->
+                <frameset rows="50%,50%">
+                    <!-- Carga de las páginas requeridas en cada frame -->
+                    <frame src="https://www.google.es" name="frameGoogle">
+                    <frame src="https://www.bing.com" name="frameBing">
+                </frameset>
+                </html>
+            `);
+
+            // Cierra el flujo de escritura del documento en la nueva ventana
+            nuevaVentana.document.close();
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Ejercicio Práctico: Manejo de Ventanas en JavaScript</h2>
+    
+    <!-- Apartado a: Botón con el texto "Dividir" que ejecuta la función dividirVentana() -->
+    <button onclick="dividirVentana()">Dividir</button>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caso Práctico: Introducir Cadena</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .resultado {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        p {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Procesamiento de Cadenas en JavaScript</h2>
+
+    <!-- Botón solicitado -->
+    <button onclick="procesarCadena()">Introducir cadena</button>
+
+    <!-- Contenedor donde se mostrarán los resultados -->
+    <div id="resultados" class="resultado" style="display: none;">
+        <p><strong>a. Cadena introducida:</strong> <span id="resCadena"></span></p>
+        <p><strong>b. Longitud de la cadena:</strong> <span id="resLongitud"></span> caracteres</p>
+        <p><strong>c. Primer carácter:</strong> <span id="resPrimerCaracter"></span></p>
+        <p><strong>d. Cadena en minúsculas:</strong> <span id="resMinusculas"></span></p>
+        <p><strong>e. Cadena en mayúsculas:</strong> <span id="resMayusculas"></span></p>
+        <p><strong>f. Subcadena (posiciones 1 a 3):</strong> <span id="resSubcadena"></span></p>
+    </div>
+
+    <script>
+        function procesarCadena() {
+            // a. Abrir ventana emergente (prompt) y guardar la cadena en una variable
+            const cadena = prompt("Por favor, introduce una cadena de texto:");
+
+            // Comprobar que el usuario no haya cancelado o dejado el campo vacío
+            if (cadena !== null && cadena.trim() !== "") {
+
+                // b. Obtener la longitud de la cadena (.length)
+                const longitud = cadena.length;
+
+                // c. Obtener el carácter de la primera posición (índice 0 o .charAt(0))
+                const primerCaracter = cadena.charAt(0);
+
+                // d. Convertir la cadena a minúsculas (.toLowerCase())
+                const minusculas = cadena.toLowerCase();
+
+                // e. Convertir la cadena a mayúsculas (.toUpperCase())
+                const mayusculas = cadena.toUpperCase();
+
+                // f. Obtener la subcadena de la primera a la tercera letra (.substring(0, 3))
+                const subcadena = cadena.substring(0, 3);
+
+                // Mostrar los datos en el documento HTML
+                document.getElementById("resCadena").textContent = cadena;
+                document.getElementById("resLongitud").textContent = longitud;
+                document.getElementById("resPrimerCaracter").textContent = primerCaracter;
+                document.getElementById("resMinusculas").textContent = minusculas;
+                document.getElementById("resMayusculas").textContent = mayusculas;
+                document.getElementById("resSubcadena").textContent = subcadena;
+
+                // Hacer visible el contenedor de resultados
+                document.getElementById("resultados").style.display = "block";
+            } else if (cadena !== null) {
+                alert("Debes introducir algún texto.");
+            }
+        }
+    </script>
+
+</body>
+</html>

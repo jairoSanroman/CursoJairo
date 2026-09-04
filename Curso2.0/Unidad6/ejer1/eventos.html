@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uso de eventos en JavaScript</title>
+
+  <script>
+
+    // ── PREGUNTA 1: CONTADOR ─────────────────────────────────────
+
+    // Variable global que almacena el valor actual del contador
+    var contador = 0;
+
+    // 1a. Función que incrementa el contador y muestra su valor en un alert
+    function incrementarContador() {
+      contador++;
+      // alert(): muestra una ventana emergente con el valor actual del contador
+      alert("Valor del contador: " + contador);
+    }
+
+    // 1b. Función que incrementa el contador y actualiza la etiqueta en la página
+    function incrementarContadorPagina() {
+      contador++;
+      // document.getElementById(): accede al elemento con id "valorContador"
+      // innerHTML: actualiza el contenido de la etiqueta con el nuevo valor
+      document.getElementById("valorContador").innerHTML = contador;
+    }
+
+    // ── PREGUNTA 2: CAMBIO DE COLOR ──────────────────────────────
+
+    // 2b. Función que cambia el color de fondo de la página
+    // Recibe como parámetro el color a aplicar (cadena de texto)
+    function cambiarColor(color) {
+      // document.body.style.backgroundColor: propiedad CSS del fondo del body
+      document.body.style.backgroundColor = color;
+    }
+
+    // 2d. Función que restaura el fondo de la página a color blanco
+    function restaurarColor() {
+      document.body.style.backgroundColor = "white";
+    }
+
+  </script>
+
+</head>
+<body>
+
+  <h1>Uso de eventos en JavaScript</h1>
+  <hr>
+
+  <!-- ── PREGUNTA 1a: Botón con alert ── -->
+  <h2>Pregunta 1.a – Contador con ventana emergente</h2>
+
+  <button onclick="incrementarContador()">Incrementar contador</button>
+  <!-- onclick: evento que ejecuta incrementarContador() al pulsar el botón -->
+
+  <hr>
+
+  <!-- ── PREGUNTA 1b: Botón con etiqueta en página ── -->
+  <h2>Pregunta 1.b – Contador en la página</h2>
+
+  <button onclick="incrementarContadorPagina()">Incrementar contador</button>
+  <!-- La etiqueta span muestra el valor del contador actualizado en tiempo real -->
+  &nbsp; Valor del contador: <span id="valorContador">0</span>
+  <!-- id="valorContador": identificador usado por getElementById() para actualizarlo -->
+
+  <hr>
+
+  <!-- ── PREGUNTA 2: Cambio de color ── -->
+  <h2>Pregunta 2 – Cambio de color de fondo</h2>
+  <p>Pasa el ratón sobre cada etiqueta para cambiar el color de fondo:</p>
+
+  <!-- 2c. onmouseover: al entrar el ratón llama a cambiarColor() con el color correspondiente -->
+  <!-- 2d. onmouseout: al salir el ratón llama a restaurarColor() para volver a blanco -->
+
+  <label
+    onmouseover="cambiarColor('green')"
+    onmouseout="restaurarColor()">
+    Verde
+  </label>
+  &nbsp;&nbsp;
+
+  <label
+    onmouseover="cambiarColor('red')"
+    onmouseout="restaurarColor()">
+    Rojo
+  </label>
+  &nbsp;&nbsp;
+
+  <label
+    onmouseover="cambiarColor('yellow')"
+    onmouseout="restaurarColor()">
+    Amarillo
+  </label>
+
+</body>
+</html>

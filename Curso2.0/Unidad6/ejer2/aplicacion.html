@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creación de una aplicación</title>
+
+  <script>
+
+    // ── PREGUNTA 1 ───────────────────────────────────────────────
+
+    // 1b. Función que pone el fondo del div en rojo
+    function ponerRojo() {
+      document.getElementById("caja").style.backgroundColor = "red";
+    }
+
+    // 1b. Función que pone el fondo del div en verde
+    function ponerVerde() {
+      document.getElementById("caja").style.backgroundColor = "green";
+    }
+
+    // 1c. Función inicio(): se ejecuta al cargar la página (onload)
+    // Asigna los eventos al div de forma programática desde JavaScript
+    function inicio() {
+
+      // 1d. onmousedown: al pulsar el botón del ratón sobre el div → rojo
+      document.getElementById("caja").onmousedown = ponerRojo;
+
+      // 1d. onmouseup: al soltar el botón del ratón → vuelve a verde
+      document.getElementById("caja").onmouseup = ponerVerde;
+    }
+
+    // ── PREGUNTA 2 ───────────────────────────────────────────────
+
+    // 2b. Resalta la etiqueta "Nombre" al recibir el foco el campo
+    function resaltarNombre() {
+      // onfocus: se activa cuando el campo de texto recibe el foco
+      document.getElementById("labelNombre").style.fontWeight = "bold";
+      document.getElementById("labelNombre").style.color = "blue";
+    }
+
+    // 2c. Restaura la etiqueta "Nombre" al perder el foco el campo
+    function restaurarNombre() {
+      // onblur: se activa cuando el campo de texto pierde el foco
+      document.getElementById("labelNombre").style.fontWeight = "normal";
+      document.getElementById("labelNombre").style.color = "black";
+    }
+
+    // 2d. Cambia el color del texto según el sexo seleccionado
+    function cambiarColorSexo() {
+      // onchange: se activa cuando cambia el valor del selector
+      var sexo = document.getElementById("sexo").value;
+      if (sexo === "hombre") {
+        document.body.style.color = "blue";
+      } else if (sexo === "mujer") {
+        document.body.style.color = "pink";
+      }
+    }
+
+    // 2e. Detecta la pulsación de la tecla "w" para abrir Google
+    // onkeydown: se activa cuando el usuario pulsa una tecla
+    document.addEventListener("keydown", function(evento) {
+      if (evento.key === "w" || evento.key === "W") {
+        window.open("https://www.google.es", "_blank");
+      }
+    });
+
+  </script>
+
+</head>
+
+<!-- 2a. onload: muestra un alert en el momento en que la página termina de cargarse -->
+<!-- También llama a inicio() para asignar los eventos al div -->
+<body onload="alert('Página cargada'); inicio();">
+
+  <!-- ── PREGUNTA 1 ── -->
+  <h1>Pregunta 1 – Caja que cambia de color</h1>
+
+  <!-- 1a. Div de 300x300px con fondo verde -->
+  <!-- Los eventos onmousedown y onmouseup se asignan desde inicio() -->
+  <div id="caja"
+       style="width:300px; height:300px; background-color:green; cursor:pointer;">
+  </div>
+  <!-- Pulsa sobre la caja para ponerla roja, suelta para volver a verde -->
+
+  <hr>
+
+  <!-- ── PREGUNTA 2 ── -->
+  <h1>Pregunta 2 – Formulario con eventos</h1>
+  <p><em>Pulsa la tecla "w" para abrir Google en una nueva pestaña.</em></p>
+
+  <form>
+
+    <p>
+      <!-- id="labelNombre": permite cambiar su estilo desde JavaScript -->
+      <label id="labelNombre" for="nombre">Nombre:</label>
+      <!-- 2b. onfocus: al recibir el foco resalta la etiqueta -->
+      <!-- 2c. onblur: al perder el foco restaura la etiqueta -->
+      <input type="text" id="nombre" name="nombre"
+             onfocus="resaltarNombre()"
+             onblur="restaurarNombre()">
+    </p>
+
+    <p>
+      <label for="edad">Edad:</label>
+      <input type="number" id="edad" name="edad">
+    </p>
+
+    <p>
+      <label for="sexo">Sexo:</label>
+      <!-- 2d. onchange: al cambiar la selección cambia el color del texto -->
+      <select id="sexo" name="sexo" onchange="cambiarColorSexo()">
+        <option value="">-- Seleccionar --</option>
+        <option value="hombre">Hombre</option>
+        <option value="mujer">Mujer</option>
+      </select>
+    </p>
+
+  </form>
+
+</body>
+</html>

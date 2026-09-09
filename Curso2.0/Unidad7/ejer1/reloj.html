@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Reloj</title>
+
+    <style>
+        .copo {
+            position: fixed;
+            top: -30px;
+            color: blue;
+            font-size: 25px;
+            z-index: 1000;
+            animation: caer 5s linear infinite;
+        }
+
+        @keyframes caer {
+            from {
+                top: -30px;
+            }
+
+            to {
+                top: 100%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+<h1>Reloj</h1>
+
+<div id="reloj"></div>
+
+<script>
+
+function mostrarReloj() {
+
+    var fecha = new Date();
+
+    var horas = fecha.getHours();
+    var minutos = fecha.getMinutes();
+    var segundos = fecha.getSeconds();
+
+    if (horas < 10) {
+        horas = "0" + horas;
+    }
+
+    if (minutos < 10) {
+        minutos = "0" + minutos;
+    }
+
+    if (segundos < 10) {
+        segundos = "0" + segundos;
+    }
+
+    document.getElementById("reloj").innerHTML =
+        horas + ":" + minutos + ":" + segundos;
+}
+
+setInterval(mostrarReloj, 1000);
+
+mostrarReloj();
+
+
+// Efecto de nieve
+
+for (var i = 0; i < 30; i++) {
+
+    var copo = document.createElement("div");
+
+    copo.className = "copo";
+    copo.innerHTML = "❄";
+
+    copo.style.left = Math.random() * 100 + "%";
+    copo.style.animationDelay = Math.random() * 5 + "s";
+
+    document.body.appendChild(copo);
+}
+
+</script>
+
+</body>
+</html>

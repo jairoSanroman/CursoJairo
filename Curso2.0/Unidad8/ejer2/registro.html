@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verificación de contraseña</title>
+
+  <!-- jQuery y jQuery Validate desde CDN -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+
+  <style>
+    .error { color: red; font-size: 13px; }
+    input { display: block; margin-bottom: 4px; }
+    label.error { display: block; }
+    p { margin-bottom: 16px; }
+  </style>
+
+  <script>
+    $(document).ready(function() {
+
+      $("#formularioRegistro").validate({
+
+        rules: {
+          // b. Email: obligatorio y formato válido
+          email: {
+            required: true,
+            email: true
+          },
+          // c. Password: obligatorio, entre 6 y 10 caracteres
+          password: {
+            required: true,
+            minlength: 6,
+            maxlength: 10
+          },
+          // d. Verificar que el segundo campo coincide con el primero
+          password2: {
+            required: true,
+            equalTo: "#password"
+          }
+        },
+
+        // Mensajes de error personalizados en español
+        messages: {
+          email: {
+            required: "El email es obligatorio",
+            email: "Introduce un email con formato válido"
+          },
+          password: {
+            required: "La contraseña es obligatoria",
+            minlength: "La contraseña debe tener al menos 6 caracteres",
+            maxlength: "La contraseña no puede tener más de 10 caracteres"
+          },
+          password2: {
+            required: "Debes repetir la contraseña",
+            equalTo: "Las contraseñas no coinciden"
+          }
+        },
+
+        submitHandler: function() {
+          alert("Registro completado correctamente");
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+
+  <h1>Formulario de registro</h1>
+
+  <form id="formularioRegistro">
+
+    <p>
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email">
+    </p>
+
+    <p>
+      <label for="password">Contraseña (entre 6 y 10 caracteres):</label>
+      <input type="password" id="password" name="password">
+    </p>
+
+    <p>
+      <label for="password2">Repetir contraseña:</label>
+      <!-- equalTo: verifica que este campo coincide con #password -->
+      <input type="password" id="password2" name="password2">
+    </p>
+
+    <button type="submit">Registrarse</button>
+    <button type="reset">Borrar</button>
+
+  </form>
+
+</body>
+</html>

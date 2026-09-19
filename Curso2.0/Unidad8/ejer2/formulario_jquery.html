@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validación con jQuery Validate</title>
+
+  <!-- jQuery desde CDN -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <!-- jQuery Validate plugin desde CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+
+  <style>
+    .error { color: red; font-size: 13px; }
+    input, textarea, select { display: block; margin-bottom: 4px; }
+    label.error { display: block; }
+    p { margin-bottom: 16px; }
+  </style>
+
+  <script>
+    $(document).ready(function() {
+
+      // Regla personalizada: solo letras y espacios
+      $.validator.addMethod("soloLetras", function(value) {
+        return /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$/.test(value);
+      }, "El campo sólo acepta letras y espacios en blanco");
+
+      $("#formulario").validate({
+
+        rules: {
+          // b. Nombre: obligatorio y solo letras
+          nombre: {
+            required: true,
+            soloLetras: true
+          },
+          // c. Edad: obligatoria, número entre 18 y 120
+          edad: {
+            required: true,
+            number: true,
+            min: 18,
+            max: 120
+          },
+          // d. Email: obligatorio y formato válido
+          email: {
+            required: true,
+            email: true
+          },
+          // e. Sexo: obligatorio
+          sexo: {
+            required: true
+          },
+          // f. Mensaje: máximo 255 caracteres
+          mensaje: {
+            maxlength: 255
+          }
+        },
+
+        // Mensajes de error personalizados en español
+        messages: {
+          nombre: {
+            required: "El campo 'nombre' es obligatorio",
+            soloLetras: "El campo 'nombre' sólo acepta letras y espacios en blanco"
+          },
+          edad: {
+            required: "El campo 'edad' es obligatorio",
+            number: "La edad debe ser un número",
+            min: "La edad mínima es 18 años",
+            max: "La edad máxima es 120 años"
+          },
+          email: {
+            required: "El campo 'email' es obligatorio",
+            email: "Introduce un email con formato válido"
+          },
+          sexo: {
+            required: "Debes seleccionar una opción de sexo"
+          },
+          mensaje: {
+            maxlength: "El mensaje no puede superar los 255 caracteres"
+          }
+        },
+
+        // Acción al enviar el formulario correctamente
+        submitHandler: function() {
+          alert("Formulario enviado correctamente");
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+
+  <h1>Formulario con jQuery Validate</h1>
+
+  <form id="formulario">
+
+    <p>
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre">
+    </p>
+
+    <p>
+      <label for="edad">Edad:</label>
+      <input type="number" id="edad" name="edad">
+    </p>
+
+    <p>
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email">
+    </p>
+
+    <p>
+      <label>Sexo:</label>
+      <label><input type="radio" name="sexo" value="M"> M</label>
+      <label><input type="radio" name="sexo" value="F"> F</label>
+    </p>
+
+    <p>
+      <label for="mensaje">Mensaje (máx. 255 caracteres):</label>
+      <textarea id="mensaje" name="mensaje" rows="5" cols="40"></textarea>
+    </p>
+
+    <button type="submit">Enviar</button>
+    <button type="reset">Borrar</button>
+
+  </form>
+
+</body>
+</html>

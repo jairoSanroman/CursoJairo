@@ -1,0 +1,129 @@
+/* ==========================================
+   ESTILOS GENERALES Y RESET BÁSICO
+   ========================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333333;
+    background-color: #ffffff;
+    line-height: 1.5;
+}
+
+/* ==========================================
+   ENCABEZADO (HEADER)
+   ========================================== */
+.header {
+    display: flex;
+    flex-direction: column; /* Apila el logo arriba y el texto debajo */
+    align-items: flex-start; /* Alinea todo a la izquierda */
+    background-color: #aeb875;
+}
+
+.logo-container {
+    background-color: #ffffff;
+    padding: 10px 15px;
+    width: auto; /* Ocupa solo el ancho del logo */
+}
+
+.logo {
+    height: 60px;
+    width: auto;
+    display: block;
+}
+
+.header-content {
+    padding: 15px 25px;
+    width: 100%;
+}
+
+.header-content h1 {
+    font-size: 1.8rem;
+    color: #000000;
+    margin: 0;
+}
+
+/* ==========================================
+   DISPOSICIÓN PRINCIPAL EN 2 COLUMNAS (LAYOUT)
+   ========================================== */
+.main-container {
+    display: flex;
+    min-height: calc(100vh - 160px);
+}
+
+.content {
+    flex: 3;
+    padding: 20px 30px;
+}
+
+.reloj {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #444444;
+}
+
+.content h2 {
+    font-size: 1.5rem;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.content p {
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+/* ==========================================
+   BARRA LATERAL (SIDEBAR Y MENÚ)
+   ========================================== */
+.sidebar {
+    flex: 1;
+    background-color: #e5deb2;
+    border-left: 1px solid #cccccc;
+}
+
+.nav-menu ul {
+    list-style: none;
+}
+
+.nav-menu li {
+    border-bottom: 1px solid #b2ad87;
+}
+
+.nav-menu a {
+    display: block;
+    padding: 12px 15px;
+    color: #556020;
+    text-decoration: none;
+    background-color: #aeb875;
+}
+
+.nav-menu a:hover {
+    background-color: #9fa969;
+}
+
+.sidebar-text {
+    padding: 20px 15px;
+    font-size: 0.95rem;
+    color: #444444;
+}
+
+/* ==========================================
+   PIE DE PÁGINA (FOOTER)
+   ========================================== */
+.footer {
+    background-color: #aeb875;
+    padding: 15px 20px;
+    clear: both;
+    border-top: 1px solid #8e9758;
+}
+
+.footer p, .footer address {
+    font-style: normal;
+    color: #222222;
+}

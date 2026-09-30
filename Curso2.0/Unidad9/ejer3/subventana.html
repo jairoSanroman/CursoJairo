@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Subventana</title>
+
+    <script>
+        function enviarAlPadre() {
+            var texto = document.getElementById("texto").value;
+
+            window.opener.recibirTexto(texto);
+        }
+    </script>
+</head>
+
+<body>
+
+    <h1>Subventana</h1>
+
+    <label for="texto">Texto:</label>
+    <input type="text" id="texto">
+
+    <button onclick="enviarAlPadre()">Enviar al padre</button>
+
+</body>
+</html>

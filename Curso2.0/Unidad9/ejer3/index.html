@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ventanas y archivos</title>
+
+    <script>
+        var ventanaHija;
+
+        function abrirURL() {
+            var url = document.getElementById("url").value;
+
+            if (url != "") {
+                window.open(url, "_blank");
+            }
+        }
+
+        function abrirSubventana() {
+            if (!ventanaHija || ventanaHija.closed) {
+                ventanaHija = window.open(
+                    "subventana.html",
+                    "subventana",
+                    "width=500,height=300"
+                );
+            } else {
+                ventanaHija.focus();
+            }
+        }
+
+        function cerrarSubventana() {
+            if (ventanaHija && !ventanaHija.closed) {
+                ventanaHija.close();
+            }
+        }
+
+        function recibirTexto(texto) {
+            document.getElementById("textoPadre").value = texto;
+        }
+    </script>
+</head>
+
+<body>
+
+    <h1>Ventana principal</h1>
+
+    <h2>Abrir una URL</h2>
+
+    <label for="url">URL:</label>
+    <input type="text" id="url" placeholder="https://www.google.com">
+
+    <button onclick="abrirURL()">Abrir ventana</button>
+
+    <hr>
+
+    <h2>Subventana</h2>
+
+    <button onclick="abrirSubventana()">Abrir subventana</button>
+
+    <button onclick="cerrarSubventana()">Cerrar subventana</button>
+
+    <br><br>
+
+    <label for="textoPadre">Texto recibido:</label>
+    <input type="text" id="textoPadre">
+
+</body>
+</html>
